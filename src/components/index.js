@@ -1,4 +1,4 @@
-import Canvas  from "./Canvas";
-import  Experience from "./Experience";
+import CanvasScene  from "./Canvas";
+import Experience from "./Experience";
 
-export {Canvas, Experience}
+export {CanvasScene, Experience}
