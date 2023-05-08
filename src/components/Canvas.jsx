@@ -9,8 +9,8 @@ const CanvasScene = () => {
         position: [0,0,10],
         fov:30
       }}
-     className='w-screen h-screen'>
-      
+     className='w-screen h-screen'
+    >
       <color attach={"background"} args={["black"]} />
       <Suspense fallback={null}>
         <Experience />
