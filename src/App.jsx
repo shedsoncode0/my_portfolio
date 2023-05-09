@@ -12,6 +12,10 @@ function App() {
     } else state.darkMode = true;
   }
 
+  const diveIn = () => {
+      state.cameraZoomLevel = 6;  
+  }
+
   return (
     <main className='w-screen h-screen relative'>
       <div className='absolute right-5 top-5 z-50'>
@@ -22,7 +26,7 @@ function App() {
       </div>
       <CanvasScene />
       <div className='w-full flex justify-center'>
-        <button className='button absolute bottom-10'>
+        <button onClick={diveIn} className='button absolute bottom-10'>
           Dive in
         </button>
       </div>

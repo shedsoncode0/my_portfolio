@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import Experience from './Experience'
 import { useSnapshot } from 'valtio';
@@ -6,6 +6,11 @@ import state from '../store';
 import { angleToRadians } from '../utils/angle';
 
 const CanvasScene = () => {
+  const [cameraPosition, setCameraPosition] = useState({
+    x: 0,
+    y: 0,
+    z: 10
+  })
   const canvasRef = useRef();
   const orbitControlsRef = useRef(null);
   const snap = useSnapshot(state);
@@ -29,15 +34,21 @@ const CanvasScene = () => {
         orbitControlsRef.current.setAzimuthalAngle(angleToRadians(snap.orbitFrontView))
       }
     }
+
+    if (snap.diveIn) {
+
+    }
   })
+
+  const diveIn = () => {
+    
+    setCameraPosition({z: 30})
+  
+}
 
   return (
     <Canvas
       ref={canvasRef}
-      camera={{
-        position: [0,0,10],
-        fov:30
-      }}
      className='w-screen h-screen'
     >
       <color attach={"background"} args={["black"]} />
