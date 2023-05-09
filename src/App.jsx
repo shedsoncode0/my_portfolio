@@ -7,15 +7,16 @@ function App() {
   const snap = useSnapshot(state);
 
   const onChecked = () => {
-    if (state.darkMode === false) state.darkMode = true
-    else state.darkMode = false;
+    if (snap.darkMode) {
+      state.darkMode = false
+    } else state.darkMode = true;
   }
 
   return (
     <main className='w-screen h-screen relative'>
       <div className='absolute right-5 top-5 z-50'>
         <label className="switch absolute">
-          <input type="checkbox" onChange={onChecked} checked={snap.darkMode}/>
+          <input type="checkbox" onChange={() => onChecked()} checked={state.darkMode}/>
           <span className="slider"></span>
         </label>
       </div>

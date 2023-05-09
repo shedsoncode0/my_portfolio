@@ -7,18 +7,17 @@ import state from '../store'
 import {angleToRadians} from '../utils/angle'
 import { useSnapshot } from 'valtio';
 
-const Experience = () => {
+const Experience = ({ orbitControlsRef }) => {
   // valtio data
   const snap = useSnapshot(state)
 
   // orbitControl ref
-  const orbitControlsRef = useRef(null);
+  // const orbitControlsRef = useRef(null);
 
   // Rotate the earth when page first load
   useEffect(() => {
     if (!!orbitControlsRef.current) {
-      orbitControlsRef.current.setAzimuthalAngle(angleToRadians(40))
-      console.log(orbitControlsRef.current)
+      orbitControlsRef.current.setAzimuthalAngle(angleToRadians(snap.orbitFrontView))
     }
   }, []);
 
@@ -31,14 +30,8 @@ const Experience = () => {
        makeDefault  
        maxPolarAngle={2} 
        minPolarAngle={1}
-       minAzimuthAngle={angleToRadians(90 - 30)}
        enableZoom={false}
        rotateSpeed={1}
-       mouseButtons={{
-        LEFT: "MOUSE",
-        MIDDLE: "MOUSE",
-        RIGHT: "MOUSE",
-       }}
       />
       {/* <Background /> */}
       <ambientLight intensity={1}/>
