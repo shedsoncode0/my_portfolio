@@ -13,23 +13,38 @@ function App() {
   }
 
   const diveIn = () => {
-      state.cameraZoomLevel = 6;  
+      let inter = setInterval(() => {
+        state.cameraZoomLevel += 0.03;
+        if (state.cameraZoomLevel >= 4) {
+          state.cameraZoomLevel = 1;
+          state.intro = false;
+          clearInterval(inter)
+        }
+      }, 30);
   }
 
   return (
     <main className='w-screen h-screen relative'>
+
+      {/* The dark mode toggle button */}
       <div className='absolute right-5 top-5 z-50'>
         <label className="switch absolute">
           <input type="checkbox" onChange={() => onChecked()} checked={state.darkMode}/>
           <span className="slider"></span>
         </label>
       </div>
+
+      {/* The 3D canvas secene */}
       <CanvasScene />
-      <div className='w-full flex justify-center'>
-        <button onClick={diveIn} className='button absolute bottom-10'>
-          Dive in
-        </button>
-      </div>
+
+      {/* The Dive in button */}
+      {snap.intro && (
+        <div className='w-full flex justify-center'>
+          <button onClick={diveIn} className='button absolute bottom-10'>
+            Dive in
+          </button>
+        </div>
+      )}
     </main>
   )
 }

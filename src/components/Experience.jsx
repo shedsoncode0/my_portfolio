@@ -2,10 +2,11 @@ import { Center, Float, OrbitControls, OrthographicCamera, PerspectiveCamera } f
 import { useFrame, useThree } from '@react-three/fiber';
 import React, { useEffect, useRef } from 'react'
 import Background from './Background';
-import Planet from './Planet4'
+import Planet from './Planet'
 import state from '../store'
 import {angleToRadians} from '../utils/angle'
 import { useSnapshot } from 'valtio';
+import CameraHelper from './CameraHelper';
 
 const Experience = ({ orbitControlsRef }) => {
   // valtio data
@@ -16,8 +17,6 @@ const Experience = ({ orbitControlsRef }) => {
     if (!!orbitControlsRef.current) {
       orbitControlsRef.current.setAzimuthalAngle(angleToRadians(snap.orbitFrontView))
     }
-    state.cameraPosition.z = 6;
-   
   }, []);
 
   return (
@@ -42,17 +41,19 @@ const Experience = ({ orbitControlsRef }) => {
        rotateSpeed={1}
        
       />
-      {/* <Background /> */}
-      <ambientLight intensity={1}/>
-      <directionalLight  intensity={1} position={[100,200,500]} castShadow color={"white"}/>
+      <Background />
+      {/* <ambientLight intensity={1}/> */}
+      {/* <directionalLight  intensity={1} position={[100,200,500]} castShadow color={"white"}/> */}
 
       {/* The floating 3D model of planet Earth */}
-      <Float speed={0.3}>
+      <Float speed={0.1}>
         <Center>
           {/* The Model */}
-          <Planet receiveShadow/>
+          <Planet rotation={[0,-0.6,0,]} />
         </Center>
       </Float>
+      <bufferGeometry />
+      {/* <CameraHelper /> */}
     </>
   )
 }

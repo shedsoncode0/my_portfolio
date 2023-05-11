@@ -3,14 +3,14 @@ import { proxy } from "valtio";
 const state = proxy({
     intro: true,
     darkMode: false,
-    orbitFrontView: 40,
-    orbitBackView: 240,
+    orbitFrontView: 0,
+    orbitBackView: 210,
     diveIn: false,
     cameraZoomLevel: 1,
     cameraPosition: {
         x: 0,
         y: 0,
-        z: 0
+        z: 6
     }
 });
 

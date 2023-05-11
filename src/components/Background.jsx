@@ -8,7 +8,7 @@ const Background = () => {
     <>
         <Environment preset='sunset' />
         
-        <Sphere scale={[100,100,100]} rotateY={Math.PI / 2}> */}
+        <Sphere scale={[100,100,100]} rotateY={Math.PI / 2}> 
             <LayerMaterial
                 lighting='physical'
                 transmission={1}

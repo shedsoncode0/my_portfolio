@@ -34,18 +34,8 @@ const CanvasScene = () => {
         orbitControlsRef.current.setAzimuthalAngle(angleToRadians(snap.orbitFrontView))
       }
     }
-
-    if (snap.diveIn) {
-
-    }
   })
-
-  const diveIn = () => {
-    
-    setCameraPosition({z: 30})
   
-}
-
   return (
     <Canvas
       ref={canvasRef}
