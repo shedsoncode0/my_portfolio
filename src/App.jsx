@@ -25,9 +25,9 @@ tl.resume();
     <main className='w-screen h-screen relative'>
 
       {/* The 3D canvas secene */}
-      {/* <CanvasScene /> */}
+      <CanvasScene />
 
-      <div ref={boxRef} className='w-20 h-20 rounded-lg bg-blue-900'>
+      <div ref={boxRef} className='w-20 h-20 absolute top-0 z-50 rounded-lg bg-blue-900'>
         Hello
       </div>
 

@@ -6,7 +6,7 @@ import React from 'react'
 const Background = () => {
   return (
     <>
-        <Environment preset='sunset' />
+        <Environment preset='city' />
         
         <Sphere scale={[100,100,100]} rotateY={Math.PI / 2}> 
             <LayerMaterial

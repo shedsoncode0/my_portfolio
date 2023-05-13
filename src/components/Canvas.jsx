@@ -6,11 +6,6 @@ import state from '../store';
 import { angleToRadians } from '../utils/angle';
 
 const CanvasScene = () => {
-  const [cameraPosition, setCameraPosition] = useState({
-    x: 0,
-    y: 0,
-    z: 10
-  })
   const canvasRef = useRef();
   const orbitControlsRef = useRef(null);
   const snap = useSnapshot(state);
@@ -41,7 +36,7 @@ const CanvasScene = () => {
       ref={canvasRef}
      className='w-screen h-screen'
     >
-      <color attach={"background"} args={["black"]} />
+      <color attach={"background"} args={["pink"]} />
       <Suspense fallback={null}>
         <Experience orbitControlsRef={orbitControlsRef} />
       </Suspense>

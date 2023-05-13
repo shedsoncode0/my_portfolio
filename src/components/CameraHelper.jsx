@@ -1,8 +1,17 @@
 import React from 'react'
 import { PerspectiveCamera } from 'three'
+import { useSnapshot } from 'valtio';
+import state from '../store';
 
 const CameraHelper = () => {
-    const camera = new PerspectiveCamera(60,1,1,3);
+  const snap = useSnapshot(state)
+  
+    const camera = new PerspectiveCamera(
+      60,
+      snap.cameraPosition.x + 1,
+      snap.cameraPosition.y + 1,
+      snap.cameraPosition.z + 1
+    );
 
   return (
     <group position={[0,0,2]}>

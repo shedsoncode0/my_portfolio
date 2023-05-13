@@ -10,7 +10,7 @@ const state = proxy({
     cameraPosition: {
         x: 0,
         y: 0,
-        z: 6
+        z: 0
     }
 });
 

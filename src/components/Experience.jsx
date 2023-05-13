@@ -7,11 +7,34 @@ import {angleToRadians} from '../utils/angle'
 import { useSnapshot } from 'valtio';
 import CameraHelper from './CameraHelper';
 import * as THREE from 'three';
-import Boombox from './Boombox';
+import Boombox from './Box';
+import { gsap } from 'gsap';
 
 const Experience = ({ orbitControlsRef }) => {
   // valtio data
   const snap = useSnapshot(state)
+
+  const boomboxRef = useRef(null);
+  const cameraRef = useRef(null);
+
+  const boombox = boomboxRef.current;
+  const camera = cameraRef.current;
+
+  const tl = gsap.timeline();
+
+  useEffect(() => {
+    if (boombox) {
+      // console.log(boomboxRef.current)
+      //     gsap.to(boombox.position, {
+      //   x: 1,
+      //   duration: 2
+      // })
+    }
+    if (camera) {
+      gsap.fromTo(camera.position, {y: 0, duration: 2}, {y: 20, duration: 2, ease: "power3"})
+    }
+    state.cameraPosition.z = 9
+  })
 
  
 
@@ -20,7 +43,7 @@ const Experience = ({ orbitControlsRef }) => {
     <>
       <PerspectiveCamera
        makeDefault 
-       zoom={snap.cameraZoomLevel} 
+       ref={cameraRef}
        position={[
         snap.cameraPosition.x,
         snap.cameraPosition.y,
@@ -38,10 +61,11 @@ const Experience = ({ orbitControlsRef }) => {
        rotateSpeed={1}
        
       />
-      <Background />
-      {/* <ambientLight intensity={1}/> */}
-      {/* <directionalLight  intensity={1} position={[100,200,500]} castShadow color={"white"}/> */}
-      <Boombox />
+      {/* <Background /> */}
+      {/* <ambientLight intensity={0.5}/> */}
+      {/* <directionalLight  intensity={0.5} position={[100,200,500]} castShadow color={"yellow"}/> */}
+      
+      <Boombox boomboxRef={boomboxRef}/>
      
       {/* <CameraHelper /> */}
     </>
