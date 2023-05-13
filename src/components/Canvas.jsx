@@ -33,10 +33,11 @@ const CanvasScene = () => {
   
   return (
     <Canvas
+    shadows
       ref={canvasRef}
      className='w-screen h-screen'
     >
-      <color attach={"background"} args={["pink"]} />
+      <color attach={"background"} args={["darkpink"]} />
       <Suspense fallback={null}>
         <Experience orbitControlsRef={orbitControlsRef} />
       </Suspense>

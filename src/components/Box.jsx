@@ -11,12 +11,21 @@ const Boomboxx = ({boomboxRef}) => {
   const { actions, names } = useAnimations(animations, boomboxRef)
 
   useEffect(() => {
-    // alert(names)
+    console.log(names)
+    console.log(actions)
     names.forEach(name => {
-      actions[name].play();
-      return () => actions[names[0]].fadeOut(100)
+      if (name.includes("Sparklies")) {
+        actions[name].play();
+      }
+      if (name.includes("Cloud")) {
+        // actions[name].setDuration({duration: 1});
+        actions[name].time = 9;
+        const random = Math.floor(Math.random() * 3) + 1;
+        actions[name].timeScale = random;
+        actions[name].play();
+      }
     })
-  }, [actions, names])
+  }, [])
 
   return (
     <group ref={boomboxRef} dispose={null}>

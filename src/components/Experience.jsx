@@ -1,12 +1,13 @@
-import { Center, Float, OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import React, { useEffect, useRef } from 'react'
-import Background from './Background';
-import state from '../store'
 import {angleToRadians} from '../utils/angle'
-import { useSnapshot } from 'valtio';
+import { Bounce, Power3 } from 'gsap/all';
 import CameraHelper from './CameraHelper';
+import Background from './Background';
+import { useSnapshot } from 'valtio';
 import * as THREE from 'three';
+import state from '../store'
 import Boombox from './Box';
 import { gsap } from 'gsap';
 
@@ -21,18 +22,38 @@ const Experience = ({ orbitControlsRef }) => {
   const camera = cameraRef.current;
 
   const tl = gsap.timeline();
+  gsap.registerPlugin(Bounce, Power3);
 
   useEffect(() => {
     if (boombox) {
       // console.log(boomboxRef.current)
-      //     gsap.to(boombox.position, {
-      //   x: 1,
-      //   duration: 2
-      // })
+          gsap.fromTo(boombox.position, {
+        y: 10,
+        duration: 1
+      },
+      {
+        y: 0,
+        duration: 3,
+        ease: Bounce.easeOut,
+      })
     }
     if (camera) {
-      gsap.fromTo(camera.position, {y: 0, duration: 2}, {y: 20, duration: 2, ease: "power3"})
-    }
+      tl.to(camera.position, { // Timeline 1
+        z: 10,
+        duration: 2,
+        ease: Power3.easeIn
+      });
+      tl.to(camera.position, { // Timeline 2
+        z: 6,
+        duration: 1,
+        ease: Power3.easeInOut
+      })
+      tl.to(camera.position, { // Timeline 3
+        y: 3,
+        duration: 1,
+        ease: Power3.easeInOut
+      })
+  }
     state.cameraPosition.z = 9
   })
 
@@ -63,9 +84,14 @@ const Experience = ({ orbitControlsRef }) => {
       />
       {/* <Background /> */}
       {/* <ambientLight intensity={0.5}/> */}
-      {/* <directionalLight  intensity={0.5} position={[100,200,500]} castShadow color={"yellow"}/> */}
+      <directionalLight  intensity={1} position={[0,200,300]} castShadow={true} color={"white"}/>
       
-      <Boombox boomboxRef={boomboxRef}/>
+     
+        <Boombox boomboxRef={boomboxRef}/>
+        <mesh receiveShadow castShadow={true} position={[0,-10,0]} rotation={[0,0,0]}>
+          <cylinderGeometry args={[0.8,0.8,20]}/>
+          <meshStandardMaterial color={"pink"} roughness={0} />
+        </mesh>
      
       {/* <CameraHelper /> */}
     </>
