@@ -8,7 +8,7 @@ import { useGLTF, useAnimations } from '@react-three/drei'
 import { useSnapshot } from 'valtio'
 import state from '../store'
 
-const Boomboxx = ({boomboxRef}) => {
+const Boomboxx = ({boomboxRef, clickOnBoomboxCd}) => {
   const snap = useSnapshot(state)
   const cdRef = useRef(null)
   const { nodes, materials, animations } = useGLTF('/box.glb')
@@ -502,8 +502,8 @@ const Boomboxx = ({boomboxRef}) => {
           <mesh name="Cloud_primitive1" geometry={nodes.Cloud_primitive1.geometry} material={materials['OUTLINE.001']} />
         </group>
         <group ref={cdRef}  name="Cassette_Tape" position={[0, 0.24, 0.33]}>
-          <mesh position={[0,0,0]} name="Cassette_Tape_primitive0" geometry={nodes.Cassette_Tape_primitive0.geometry} material={materials['OUTLINE4.002']} />
-          <mesh position={[0,0,0]} name="Cassette_Tape_primitive1" geometry={nodes.Cassette_Tape_primitive1.geometry} material={materials['Cassette_Tape.001']} />
+          <mesh name="Cassette_Tape_primitive0" geometry={nodes.Cassette_Tape_primitive0.geometry} material={materials['OUTLINE4.002']} />
+          <mesh position={[0,0,0]} onClick={(e) => clickOnBoomboxCd(e)} name="Cassette_Tape_primitive1" geometry={nodes.Cassette_Tape_primitive1.geometry} material={materials['Cassette_Tape.001']} />
         </group>
         <group name="Cassette_Door" position={[0, 0.24, 0.33]} rotation={[-0.61, Math.PI / 2, 0]}>
           <mesh name="Cassette_Door_primitive0" geometry={nodes.Cassette_Door_primitive0.geometry} material={materials['OUTLINE4.002']} />
