@@ -5,27 +5,78 @@ Command: npx gltfjsx@6.1.4 public/box.glb
 
 import React, { useEffect, useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
+import { useSnapshot } from 'valtio'
+import state from '../store'
 
 const Boomboxx = ({boomboxRef}) => {
+  const snap = useSnapshot(state)
+  const cdRef = useRef(null)
   const { nodes, materials, animations } = useGLTF('/box.glb')
   const { actions, names } = useAnimations(animations, boomboxRef)
 
   useEffect(() => {
     console.log(names)
+    
     console.log(actions)
     names.forEach(name => {
       if (name.includes("Sparklies")) {
+        const random = Math.random(1);
+        actions[name].timeScale = random;
         actions[name].play();
       }
       if (name.includes("Cloud")) {
-        // actions[name].setDuration({duration: 1});
-        actions[name].time = 9;
-        const random = Math.floor(Math.random() * 3) + 1;
+        const random = Math.random(1);
         actions[name].timeScale = random;
+        actions[name].play();
+      }  
+      
+      if (name.includes("Daisy")) {
+        const random = Math.random(2);
+        actions[name].timeScale = random;
+        actions[name].play();
+      }
+      
+      if (name.includes("Switch")) {
+        const random = Math.random(2);
+        actions[name].timeScale = random;
+        actions[name].play();
+      }
+      if (name.includes("Boombox")) {
+
+        actions[name].timeScale = 0.7;
         actions[name].play();
       }
     })
   }, [])
+
+  useEffect(() => {
+    names.forEach(name => {
+      if (state.startBoomboxAnimation === true) {
+        if (name.includes("Leaf")) {
+          actions[name].timeScale = 0.5;
+          actions[name].loop = 0
+          actions[name]._clip.duration = 20
+          actions[name].play();
+        }
+        if (name.includes("Flower")) {
+          actions[name].timeScale = 0.5;
+          actions[name]._clip.duration = 20
+          actions[name].play();
+        }
+        if (name.includes("Rose")) {
+          actions[name].timeScale = 0.5;
+          actions[name]._clip.duration = 20
+          actions[name].play();
+        }
+        if (name.includes("Cassette")) {
+          const random = Math.random(2);
+          actions[name].timeScale = 0.6
+          actions[name]._clip.duration = 20
+          actions[name].play();
+        }
+      }
+    })
+  }, [snap.startBoomboxAnimation])
 
   return (
     <group ref={boomboxRef} dispose={null}>
@@ -347,12 +398,12 @@ const Boomboxx = ({boomboxRef}) => {
           <mesh name="Daisy001_primitive1" geometry={nodes.Daisy001_primitive1.geometry} material={materials['OUTLINE6.001']} />
         </group>
         <group name="Daisy_Stem003" position={[-0.17, 0.32, 0.08]} rotation={[-1.61, 1.06, 1.51]} scale={0.01}>
-          <mesh name="Daisy_Stem003_primitive0" geometry={nodes.Daisy_Stem003_primitive0.geometry} material={materials['Green.001']} />
+          {/* <mesh name="Daisy_Stem003_primitive0" geometry={nodes.Daisy_Stem003_primitive0.geometry} material={materials['Green.001']} />
           <mesh name="Daisy_Stem003_primitive1" geometry={nodes.Daisy_Stem003_primitive1.geometry} material={materials['OUTLINE4.002']} />
           <mesh name="Daisy_Stem003_primitive2" geometry={nodes.Daisy_Stem003_primitive2.geometry} material={materials['Leaf.002']} />
           <mesh name="Daisy_Stem003_primitive3" geometry={nodes.Daisy_Stem003_primitive3.geometry} material={materials['WHITE.001']} />
           <mesh name="Daisy_Stem003_primitive4" geometry={nodes.Daisy_Stem003_primitive4.geometry} material={materials['OUTLINE6.001']} />
-          <mesh name="Daisy_Stem003_primitive5" geometry={nodes.Daisy_Stem003_primitive5.geometry} material={materials['Purple_Pastel.001']} />
+          <mesh name="Daisy_Stem003_primitive5" geometry={nodes.Daisy_Stem003_primitive5.geometry} material={materials['Purple_Pastel.001']} /> */}
         </group>
         <group name="Daisy_Stem002" position={[0.14, 0.19, -0.41]} rotation={[-0.09, 0.81, -0.26]} scale={1.7}>
           <mesh name="Daisy_Stem002_primitive0" geometry={nodes.Daisy_Stem002_primitive0.geometry} material={materials['Leaf.002']} />
@@ -450,9 +501,9 @@ const Boomboxx = ({boomboxRef}) => {
           <mesh name="Cloud_primitive0" geometry={nodes.Cloud_primitive0.geometry} material={materials['Cloud.001']} />
           <mesh name="Cloud_primitive1" geometry={nodes.Cloud_primitive1.geometry} material={materials['OUTLINE.001']} />
         </group>
-        <group name="Cassette_Tape" position={[0, 0.24, 0.33]}>
-          <mesh name="Cassette_Tape_primitive0" geometry={nodes.Cassette_Tape_primitive0.geometry} material={materials['OUTLINE4.002']} />
-          <mesh name="Cassette_Tape_primitive1" geometry={nodes.Cassette_Tape_primitive1.geometry} material={materials['Cassette_Tape.001']} />
+        <group ref={cdRef}  name="Cassette_Tape" position={[0, 0.24, 0.33]}>
+          <mesh position={[0,0,0]} name="Cassette_Tape_primitive0" geometry={nodes.Cassette_Tape_primitive0.geometry} material={materials['OUTLINE4.002']} />
+          <mesh position={[0,0,0]} name="Cassette_Tape_primitive1" geometry={nodes.Cassette_Tape_primitive1.geometry} material={materials['Cassette_Tape.001']} />
         </group>
         <group name="Cassette_Door" position={[0, 0.24, 0.33]} rotation={[-0.61, Math.PI / 2, 0]}>
           <mesh name="Cassette_Door_primitive0" geometry={nodes.Cassette_Door_primitive0.geometry} material={materials['OUTLINE4.002']} />

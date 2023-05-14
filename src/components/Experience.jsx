@@ -1,4 +1,4 @@
-import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import { Center, OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import React, { useEffect, useRef } from 'react'
 import {angleToRadians} from '../utils/angle'
@@ -51,11 +51,36 @@ const Experience = ({ orbitControlsRef }) => {
       tl.to(camera.position, { // Timeline 3
         y: 3,
         duration: 1,
-        ease: Power3.easeInOut
-      })
+        ease: Power3.easeInOut,
+        onComplete: () => {
+          zoomInAnimation()
+        }
+        // onComplete: () => {
+        //   state.startBoomboxAnimation = true;
+        // }
+      },)
   }
     state.cameraPosition.z = 9
-  })
+  }, [boombox])
+
+  const zoomInAnimation = () => {
+    gsap.to(camera.position, {
+      y: 0,
+      duration: 3,
+    })
+
+    tl.to(boombox.position, {
+      y: -0.5,
+      duration: 2,
+      delay: 3,
+      ease: Power3.easeIn
+    })
+    tl.to(boombox.position, {
+      x: 0.8,
+      duration: 2,
+      ease: Power3.easeInOut
+    })
+  }
 
  
 
@@ -76,22 +101,23 @@ const Experience = ({ orbitControlsRef }) => {
       <OrbitControls
       ref={orbitControlsRef}
        makeDefault  
-       maxPolarAngle={2} 
-       minPolarAngle={1}
+       enablePan = {false}
+       enableRotate = {false}
       //  enableZoom={false}
        rotateSpeed={1}
        
       />
       {/* <Background /> */}
       {/* <ambientLight intensity={0.5}/> */}
-      <directionalLight  intensity={1} position={[0,200,300]} castShadow={true} color={"white"}/>
+      {/* <directionalLight  intensity={1} position={[0,200,300]} castShadow={true} color={"white"}/> */}
       
-     
+      {/* <Center> */}
         <Boombox boomboxRef={boomboxRef}/>
-        <mesh receiveShadow castShadow={true} position={[0,-10,0]} rotation={[0,0,0]}>
+      {/* </Center> */}
+        {/* <mesh receiveShadow castShadow={true} position={[0,-10,0]} rotation={[0,0,0]}>
           <cylinderGeometry args={[0.8,0.8,20]}/>
-          <meshStandardMaterial color={"pink"} roughness={0} />
-        </mesh>
+          <meshStandardMaterial color={"white"} roughness={0} />
+        </mesh> */}
      
       {/* <CameraHelper /> */}
     </>

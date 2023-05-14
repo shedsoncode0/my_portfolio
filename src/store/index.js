@@ -7,6 +7,8 @@ const state = proxy({
     orbitBackView: 210,
     diveIn: false,
     cameraZoomLevel: 1,
+    startBoomboxAnimation: false,
+    canvasColor: "pink",
     cameraPosition: {
         x: 0,
         y: 0,
