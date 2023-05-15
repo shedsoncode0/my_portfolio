@@ -4,15 +4,19 @@ Command: npx gltfjsx@6.1.4 public/box.glb
 */
 
 import React, { useEffect, useRef } from 'react'
-import { useGLTF, useAnimations } from '@react-three/drei'
+import { useGLTF, useAnimations, RenderTexture, Text, PerspectiveCamera } from '@react-three/drei'
 import { useSnapshot } from 'valtio'
+import * as THREE from 'three'
 import state from '../store'
+import { angleToRadians } from '../utils/angle'
 
 const Boomboxx = ({boomboxRef, clickOnBoomboxCd}) => {
   const snap = useSnapshot(state)
   const cdRef = useRef(null)
   const { nodes, materials, animations } = useGLTF('/box.glb')
   const { actions, names } = useAnimations(animations, boomboxRef)
+
+  const vec2s = new THREE.Vector2(3, 100);
 
   useEffect(() => {
     console.log(names)
@@ -502,7 +506,7 @@ const Boomboxx = ({boomboxRef, clickOnBoomboxCd}) => {
           <mesh name="Cloud_primitive1" geometry={nodes.Cloud_primitive1.geometry} material={materials['OUTLINE.001']} />
         </group>
         <group ref={cdRef}  name="Cassette_Tape" position={[0, 0.24, 0.33]}>
-          <mesh name="Cassette_Tape_primitive0" geometry={nodes.Cassette_Tape_primitive0.geometry} material={materials['OUTLINE4.002']} />
+          {/* <mesh name="Cassette_Tape_primitive0" geometry={nodes.Cassette_Tape_primitive0.geometry} material={materials['OUTLINE4.002']} /> */}
           <mesh position={[0,0,0]} onClick={(e) => clickOnBoomboxCd(e)} name="Cassette_Tape_primitive1" geometry={nodes.Cassette_Tape_primitive1.geometry} material={materials['Cassette_Tape.001']} />
         </group>
         <group name="Cassette_Door" position={[0, 0.24, 0.33]} rotation={[-0.61, Math.PI / 2, 0]}>

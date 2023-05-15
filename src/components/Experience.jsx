@@ -2,7 +2,7 @@ import { Center, OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import React, { useEffect, useRef } from 'react';
 import { angleToRadians } from '../utils/angle';
-import { Bounce, Power3 } from 'gsap/all';
+import { Bounce, Power3, Power4 } from 'gsap/all';
 import CameraHelper from './CameraHelper';
 import Background from './Background';
 import { useSnapshot } from 'valtio';
@@ -22,7 +22,7 @@ const Experience = ({ orbitControlsRef }) => {
   const camera = cameraRef.current;
 
   const tl = gsap.timeline();
-  gsap.registerPlugin(Bounce, Power3);
+  gsap.registerPlugin(Bounce);
 
   useEffect(() => {
     if (boombox) {
@@ -56,6 +56,7 @@ const Experience = ({ orbitControlsRef }) => {
       tl.to(camera.position, {
         // Timeline 3
         y: 3,
+        x: 3,
         duration: 1,
         ease: Power3.easeInOut,
         onComplete: () => {
@@ -67,26 +68,24 @@ const Experience = ({ orbitControlsRef }) => {
   }, [boombox]);
 
   const zoomInAnimation = () => {
-    gsap.to(camera.position, {
+    tl.to(camera.position, {
       y: 0,
       duration: 3,
     });
-
     tl.to(boombox.position, {
       y: -0.5,
       duration: 2,
-      delay: 3,
       ease: Power3.easeOut,
     });
     tl.to(boombox.position, {
       x: 0.8,
       duration: 2,
-      ease: Power3.easeOut,
+      ease: Power4.easeInOut,
     });
     tl.to(camera.position, {
-      z: 0.1,
+      z: -0.2,
       duration: 4,
-      ease: Power3.easeOut,
+      ease: Power3.easeInOut,
     });
   };
 
@@ -111,21 +110,17 @@ const Experience = ({ orbitControlsRef }) => {
         ref={orbitControlsRef}
         makeDefault
         enablePan={false}
-        enableRotate={false}
-        //  enableZoom={false}
+        // enableRotate={false}
+         enableZoom={false}
         rotateSpeed={1}
       />
       {/* <Background /> */}
-      {/* <ambientLight intensity={0.5}/> */}
-      {/* <directionalLight  intensity={1} position={[0,200,300]} castShadow={true} color={"white"}/> */}
+      {/* <ambientLight intensity={0.5} /> */}
+      <directionalLight  intensity={1} position={[0,200,300]} castShadow={true} color={"white"}/>
 
       {/* <Center> */}
       <Boombox clickOnBoomboxCd={clickOnBoomboxCd} boomboxRef={boomboxRef} />
       {/* </Center> */}
-      {/* <mesh receiveShadow castShadow={true} position={[0,-10,0]} rotation={[0,0,0]}>
-          <cylinderGeometry args={[0.8,0.8,20]}/>
-          <meshStandardMaterial color={"white"} roughness={0} />
-        </mesh> */}
 
       {/* <CameraHelper /> */}
     </>
