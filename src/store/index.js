@@ -1,4 +1,6 @@
-import { proxy } from 'valtio';
+/** @format */
+
+import { proxy } from "valtio";
 
 const state = proxy({
   intro: true,
@@ -8,11 +10,11 @@ const state = proxy({
   diveIn: false,
   cameraZoomLevel: 1,
   startBoomboxAnimation: false,
-  canvasColor: 'pink',
+  canvasColor: "pink",
   cameraPosition: {
     x: 0,
     y: 0,
-    z: 52,
+    z: 10,
   },
   cameraHelper: {
     x: 0,

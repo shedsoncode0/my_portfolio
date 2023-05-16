@@ -1,22 +1,24 @@
-import { Center, OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import { useFrame, useThree } from '@react-three/fiber';
-import React, { useEffect, useRef } from 'react';
-import { angleToRadians } from '../utils/angle';
-import { Bounce, Power3, Power4 } from 'gsap/all';
-import CameraHelper from './CameraHelper';
-import Background from './Background';
-import { useSnapshot } from 'valtio';
-import * as THREE from 'three';
-import state from '../store';
-import Boombox from './Box';
-import { gsap } from 'gsap';
-import City from './City';
+/** @format */
+
+import { Center, OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
+import React, { useEffect, useRef } from "react";
+import { angleToRadians } from "../utils/angle";
+import { Bounce, Power3, Power4 } from "gsap/all";
+import CameraHelper from "./CameraHelper";
+import Background from "./Background";
+import { useSnapshot } from "valtio";
+import * as THREE from "three";
+import state from "../store";
+import Boombox from "./Box";
+import { gsap } from "gsap";
+import City from "./City";
 import {
   boomboxBounce,
   boomboxCameraBounceZoomAnimation,
   boomboxZoomAnimation,
-} from '../utils/animations';
-import { setCameraToCityView } from '../utils';
+} from "../utils/animations";
+import { setCameraToCityView } from "../utils";
 
 const Experience = ({ orbitControlsRef }) => {
   // valtio data
@@ -65,19 +67,19 @@ const Experience = ({ orbitControlsRef }) => {
   // Animation for boombox bounce and camera bounce zoom
   useEffect(() => {
     if (boombox) boomboxBounce(boombox);
-    if (camera) boomboxCameraBounceZoomAnimation(camera);
+    if (camera) boomboxCameraBounceZoomAnimation(state.cameraPosition);
     state.cameraPosition.z = 9;
   }, [boombox]);
 
   // Animation for when you click the CD
   const zoomInAnimation = () => {
-    boomboxZoomAnimation(boombox, camera);
+    boomboxZoomAnimation(boombox, state.cameraPosition);
   };
 
   // Click event for the CD
-  const clickOnBoomboxCd = () => {
+  if (state.diveIn) {
     zoomInAnimation();
-  };
+  }
 
   return (
     <>
@@ -107,12 +109,12 @@ const Experience = ({ orbitControlsRef }) => {
         position={[0, 200, 300]}
         castShadow={true}
         receiveShadow
-        color={'white'}
+        color={"white"}
       />
 
       {/* <Center> */}
       {/* <City castShadow receiveShadow position={[12, 0, 0]} /> */}
-      <Boombox clickOnBoomboxCd={clickOnBoomboxCd} boomboxRef={boomboxRef} />
+      <Boombox boomboxRef={boomboxRef} />
       {/* </Center> */}
 
       {/* <CameraHelper cameraP={camera} /> */}

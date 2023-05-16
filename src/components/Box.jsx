@@ -503,7 +503,7 @@ const Boomboxx = ({boomboxRef, clickOnBoomboxCd}) => {
         </group>
         <group ref={cdRef}  name="Cassette_Tape" position={[0, 0.24, 0.33]}>
           {/* <mesh name="Cassette_Tape_primitive0" geometry={nodes.Cassette_Tape_primitive0.geometry} material={materials['OUTLINE4.002']} /> */}
-          <mesh position={[0,0,0]} onClick={(e) => clickOnBoomboxCd(e)} name="Cassette_Tape_primitive1" geometry={nodes.Cassette_Tape_primitive1.geometry} material={materials['Cassette_Tape.001']} />
+          {/* <mesh position={[0,0,0]} onClick={(e) => clickOnBoomboxCd(e)} name="Cassette_Tape_primitive1" geometry={nodes.Cassette_Tape_primitive1.geometry} material={materials['Cassette_Tape.001']} /> */}
         </group>
         <group name="Cassette_Door" position={[0, 0.24, 0.33]} rotation={[-0.61, Math.PI / 2, 0]}>
           <mesh name="Cassette_Door_primitive0" geometry={nodes.Cassette_Door_primitive0.geometry} material={materials['OUTLINE4.002']} />
