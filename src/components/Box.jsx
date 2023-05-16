@@ -19,9 +19,6 @@ const Boomboxx = ({boomboxRef, clickOnBoomboxCd}) => {
   const vec2s = new THREE.Vector2(3, 100);
 
   useEffect(() => {
-    console.log(names)
-    
-    console.log(actions)
     names.forEach(name => {
       if (name.includes("Sparklies")) {
         const random = Math.random(1);
@@ -73,7 +70,6 @@ const Boomboxx = ({boomboxRef, clickOnBoomboxCd}) => {
           actions[name].play();
         }
         if (name.includes("Cassette")) {
-          const random = Math.random(2);
           actions[name].timeScale = 0.6
           actions[name]._clip.duration = 20
           actions[name].play();

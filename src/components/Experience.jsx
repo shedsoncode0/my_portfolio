@@ -10,85 +10,71 @@ import * as THREE from 'three';
 import state from '../store';
 import Boombox from './Box';
 import { gsap } from 'gsap';
+import City from './City';
+import {
+  boomboxBounce,
+  boomboxCameraBounceZoomAnimation,
+  boomboxZoomAnimation,
+} from '../utils/animations';
+import { setCameraToCityView } from '../utils';
 
 const Experience = ({ orbitControlsRef }) => {
   // valtio data
   const snap = useSnapshot(state);
 
+  // Window size
+  let WindowsSize;
+
+  useFrame(() => {
+    WindowsSize = window.innerWidth;
+    if (camera) {
+      if (WindowsSize < 700) {
+        camera.zoom = 0.6;
+      } else {
+        camera.zoom = 1;
+      }
+    }
+  });
+
+  // useEffect(() => {
+  //   setCameraToCityView(snap);
+  // }, []);
+
+  // Element Refrence
   const boomboxRef = useRef(null);
   const cameraRef = useRef(null);
 
+  // Ref objects
   const boombox = boomboxRef.current;
   const camera = cameraRef.current;
 
+  // Gsap
   const tl = gsap.timeline();
   gsap.registerPlugin(Bounce);
 
+  // useEffect(() => {
+  //   if (camera) {
+  //     setCameraToCityView(snap);
+  //     gsap.to(camera.position, {
+  //       z: 40,
+  //       duration: 3,
+  //     });
+  //   }
+  // }, [camera]);
+
+  // Animation for boombox bounce and camera bounce zoom
   useEffect(() => {
-    if (boombox) {
-      // console.log(boomboxRef.current)
-      gsap.fromTo(
-        boombox.position,
-        {
-          y: 10,
-          duration: 1,
-        },
-        {
-          y: 0,
-          duration: 3,
-          ease: Bounce.easeOut,
-        }
-      );
-    }
-    if (camera) {
-      tl.to(camera.position, {
-        // Timeline 1
-        z: 10,
-        duration: 2,
-        ease: Power3.easeIn,
-      });
-      tl.to(camera.position, {
-        // Timeline 2
-        z: 6,
-        duration: 1,
-        ease: Power3.easeInOut,
-      });
-      tl.to(camera.position, {
-        // Timeline 3
-        y: 3,
-        x: 3,
-        duration: 1,
-        ease: Power3.easeInOut,
-        onComplete: () => {
-          state.startBoomboxAnimation = true;
-        },
-      });
-    }
+    if (boombox) boomboxBounce(boombox);
+    if (camera) boomboxCameraBounceZoomAnimation(camera);
     state.cameraPosition.z = 9;
   }, [boombox]);
 
+  // Animation for when you click the CD
   const zoomInAnimation = () => {
-    tl.to(camera.position, {
-      y: 0,
-      duration: 3,
-    });
-    tl.to(boombox.position, {
-      y: -0.5,
-      duration: 2,
-      ease: Power3.easeOut,
-    });
-    tl.to(boombox.position, {
-      x: 0.8,
-      duration: 2,
-      ease: Power4.easeInOut,
-    });
-    tl.to(camera.position, {
-      z: -0.2,
-      duration: 4,
-      ease: Power3.easeInOut,
-    });
+    boomboxZoomAnimation(boombox, camera);
   };
 
+  // Click event for the CD
   const clickOnBoomboxCd = () => {
     zoomInAnimation();
   };
@@ -111,18 +97,25 @@ const Experience = ({ orbitControlsRef }) => {
         makeDefault
         enablePan={false}
         // enableRotate={false}
-         enableZoom={false}
+        // enableZoom={false}
         rotateSpeed={1}
       />
       {/* <Background /> */}
       {/* <ambientLight intensity={0.5} /> */}
-      <directionalLight  intensity={1} position={[0,200,300]} castShadow={true} color={"white"}/>
+      <directionalLight
+        intensity={1}
+        position={[0, 200, 300]}
+        castShadow={true}
+        receiveShadow
+        color={'white'}
+      />
 
       {/* <Center> */}
+      {/* <City castShadow receiveShadow position={[12, 0, 0]} /> */}
       <Boombox clickOnBoomboxCd={clickOnBoomboxCd} boomboxRef={boomboxRef} />
       {/* </Center> */}
 
-      {/* <CameraHelper /> */}
+      {/* <CameraHelper cameraP={camera} /> */}
     </>
   );
 };

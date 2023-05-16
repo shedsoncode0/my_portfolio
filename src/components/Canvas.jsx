@@ -13,17 +13,17 @@ const CanvasScene = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     // addEventListener("pointerup")
-    canvas.addEventListener('pointerup', () => {
-      if (snap.darkMode) {
-        orbitControlsRef.current.setAzimuthalAngle(
-          angleToRadians(snap.orbitBackView)
-        );
-      } else {
-        orbitControlsRef.current.setAzimuthalAngle(
-          angleToRadians(snap.orbitFrontView)
-        );
-      }
-    });
+    // canvas.addEventListener('pointerup', () => {
+    //   if (snap.darkMode) {
+    //     orbitControlsRef.current.setAzimuthalAngle(
+    //       angleToRadians(snap.orbitBackView)
+    //     );
+    //   } else {
+    //     orbitControlsRef.current.setAzimuthalAngle(
+    //       angleToRadians(snap.orbitFrontView)
+    //     );
+    //   }
+    // });
 
     // When you click on the checkbox rotate the earth model
     if (!!orbitControlsRef.current) {

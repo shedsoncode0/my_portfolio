@@ -1,27 +1,37 @@
-import { Environment, Sphere } from '@react-three/drei'
-import { Gradient, LayerMaterial } from 'lamina'
-import * as THREE from 'three'
-import React from 'react'
+import { Environment, Sphere } from '@react-three/drei';
+import { Gradient, LayerMaterial } from 'lamina';
+import * as THREE from 'three';
+import React from 'react';
+import { angleToRadians } from '../utils/angle';
 
 const Background = () => {
   return (
     <>
-        <Environment preset='city' />
-        
-        <Sphere scale={[100,100,100]} rotateY={Math.PI / 2}> 
-            <LayerMaterial
-                lighting='physical'
-                transmission={1}
-                clearcoat={0}
-                roughness={100}
-                side={THREE.BackSide}
-            >
-                <Gradient colorA={"black"} colorB={"black"} axes='y' start={0} end={-0.5 } />
-            </LayerMaterial> 
-             <meshNormalMaterial />
-        </Sphere>
-    </>
-  )
-}
+      <Environment preset='sunset' />
 
-export default Background
+      <Sphere
+        scale={[100, 100, 100]}
+        rotation={[angleToRadians(25), angleToRadians(0), angleToRadians(0)]}
+      >
+        <LayerMaterial
+          lighting='physical'
+          transmission={0}
+          clearcoat={0}
+          roughness={100}
+          side={THREE.BackSide}
+        >
+          <Gradient
+            colorB={'#ebb2b1'}
+            colorA={'#82addb'}
+            axes='y'
+            start={0}
+            end={-0.5}
+          />
+        </LayerMaterial>
+        <meshNormalMaterial />
+      </Sphere>
+    </>
+  );
+};
+
+export default Background;

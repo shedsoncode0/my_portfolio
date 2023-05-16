@@ -17,7 +17,11 @@ function App() {
 
       {/* The 3D canvas secene */}
       <CanvasScene />
-
+      <div className='absolute  bottom-10 left-0 w-full flex justify-center'>
+        <button className='px-4 button py-2 rounded-full font-semibold bg-white'>
+          Dive in
+        </button>
+      </div>
     </main>
   )
 }
