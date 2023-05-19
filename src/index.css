@@ -1,19 +1,21 @@
+/** @format */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .container {
-    @apply  h-screen w-screen;
+  @apply h-screen w-screen;
 }
 
 .canvas {
-    @apply w-screen h-screen
+  @apply w-screen h-screen;
 }
 
 .button {
@@ -41,89 +43,104 @@ button:hover {
 
 button:active {
   transform: translateY(-1px);
-  }
+}
 
-
-
-  /* The switch - the box around the slider */
+/* The switch - the box around the slider */
 .switch {
-    font-size: 17px;
-    position: relative;
-    display: inline-block;
-    width: 3em;
-    height: 1.6em;
+  font-size: 17px;
+  position: relative;
+  display: inline-block;
+  width: 3em;
+  height: 1.6em;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #223243;
+  transition: 0.4s;
+  border-radius: 30px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1em;
+  width: 1em;
+  border-radius: 20px;
+  left: 0.3em;
+  bottom: 0.3em;
+  background-color: yellow;
+  box-shadow: none;
+  transition: 0.4s;
+  animation: anima1 0.3s linear;
+}
+
+.switch input:checked + .slider:before {
+  background-color: #223243;
+  box-shadow: inset -4px -1px 0 1.8px #fff;
+  animation: anima 0.3s linear;
+  transform: translateX(1.4em);
+}
+
+@keyframes anima1 {
+  0% {
+    transform: translateX(1.5em);
   }
-  
-  /* Hide default HTML checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+
+  80% {
+    transform: translateX(-0.4em);
   }
-  
-  /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #223243;
-    transition: .4s;
-    border-radius: 30px;
+
+  100% {
+    transform: translateX(0em);
   }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 1em;
-    width: 1em;
-    border-radius: 20px;
-    left: 0.3em;
-    bottom: 0.3em;
-    background-color: yellow;
-    box-shadow: none;
-    transition: .4s;
-    animation: anima1 0.3s linear;
+}
+
+@keyframes anima {
+  0% {
+    transform: translateX(0px);
   }
-  
-  .switch input:checked + .slider:before {
-    background-color: #223243;
-    box-shadow: inset -4px -1px 0 1.8px #fff;
-    animation: anima 0.3s linear;
+
+  80% {
+    transform: translateX(1.6em);
+  }
+
+  100% {
     transform: translateX(1.4em);
   }
-  
-  @keyframes anima1 {
-    0% {
-      transform: translateX(1.5em);
-    }
-  
-    80% {
-      transform: translateX(-0.4em);
-    }
-  
-    100% {
-      transform: translateX(0em);
-    }
-  }
-  
-  
-  @keyframes anima {
-    0% {
-      transform: translateX(0px)
-    }
-  
-    80% {
-      transform: translateX(1.6em)
-    }
-  
-    100% {
-      transform: translateX(1.4em)
-    }
+}
+
+/* Mouse wheel animation */
+.mouse-wheel {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  animation: move-wheel 2s linear infinite;
+}
+
+@keyframes move-wheel {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem);
   }
 
-  .c {
-    color: #194342;
+  100% {
+    opacity: 1;
+    transform: translateY(0.4rem);
   }
+}

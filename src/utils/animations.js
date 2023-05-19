@@ -39,9 +39,14 @@ const boomboxZoomAnimation = (boombox, camera) => {
     ease: Power4.easeInOut,
   });
   tl.to(boombox.position, {
-    z: 6,
-    duration: 3,
+    z: 7,
+    duration: 6,
     ease: Power3.easeInOut,
+    onComplete: () => {
+      state.startBoomboxAnimation = true;
+      state.button = "none";
+      state.intro = false;
+    },
   });
 };
 
@@ -66,6 +71,7 @@ const boomboxCameraBounceZoomAnimation = (camera) => {
     ease: Power3.easeInOut,
     onComplete: () => {
       state.startBoomboxAnimation = true;
+      state.button = "dive_in";
     },
   });
 };

@@ -8,13 +8,19 @@ const state = proxy({
   orbitFrontView: 0,
   orbitBackView: 210,
   diveIn: false,
+  diveOut: false,
+  button: "none",
   cameraZoomLevel: 1,
   startBoomboxAnimation: false,
-  canvasColor: "pink",
+  canvasColor: "#82addb",
+  deviceSize: {
+    mobile_phone: 500,
+    tablet_phone: 800,
+  },
   cameraPosition: {
     x: 0,
     y: 0,
-    z: 10,
+    z: 10, // default 10
   },
   cameraHelper: {
     x: 0,
@@ -26,6 +32,33 @@ const state = proxy({
       x: 0,
       y: 2,
       z: 52,
+    },
+  },
+
+  city: {
+    position: {
+      x: 13,
+      y: -5, //default 4
+      z: -40,
+    },
+  },
+
+  // Cars Section
+  character: {
+    position: {
+      x: 0,
+      y: 0,
+      z: -5,
+    },
+    rotation: {
+      x: -2,
+      y: -2.22,
+      z: -2,
+    },
+    tireRotation: {
+      x: 0,
+      y: 0,
+      z: 0,
     },
   },
 });
