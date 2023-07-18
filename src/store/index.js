@@ -12,7 +12,7 @@ const state = proxy({
   button: "none",
   cameraZoomLevel: 1,
   startBoomboxAnimation: false,
-  canvasColor: "#82addb",
+  canvasColor: "black",
   deviceSize: {
     mobile_phone: 500,
     tablet_phone: 800,
@@ -20,7 +20,7 @@ const state = proxy({
   cameraPosition: {
     x: 0,
     y: 0,
-    z: 10, // default 10
+    z: 0, // default 10
   },
   cameraHelper: {
     x: 0,

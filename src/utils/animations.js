@@ -1,83 +1,31 @@
-/** @format */
-
-import { gsap } from "gsap";
-import { Bounce, Power3, Power4 } from "gsap/all";
-import state from "../store";
-
-const tl = gsap.timeline();
-
-const boomboxBounce = (boombox) => {
-  gsap.fromTo(
-    boombox.position,
-    {
-      y: 10,
-      duration: 1,
+export const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.5,
+      staggerChildren: 0.2,
     },
-    {
-      y: 0,
-      duration: 3,
-      ease: Bounce.easeOut,
-    }
-  );
+  },
 };
 
-const boomboxZoomAnimation = (boombox, camera) => {
-  tl.to(camera, {
-    y: 0,
-    x: 0,
-    duration: 2,
-    ease: Power3.easeOut,
-  });
-  tl.to(boombox.position, {
-    y: -0.5,
-    duration: 2,
-    ease: Power3.easeIn,
-  });
-  tl.to(boombox.position, {
-    x: 0.8,
-    duration: 2,
-    ease: Power4.easeInOut,
-  });
-  tl.to(boombox.position, {
-    z: 7,
-    duration: 6,
-    ease: Power3.easeInOut,
-    onComplete: () => {
-      state.startBoomboxAnimation = true;
-      state.button = "none";
-      state.intro = false;
-    },
-  });
+export const item = {
+  hidden: { y: "100%" },
+  show: { y: "0%", transition: { duration: 0.5 } },
 };
 
-const boomboxCameraBounceZoomAnimation = (camera) => {
-  tl.to(camera, {
-    // Timeline 1
-    z: 10,
-    duration: 2,
-    ease: Power3.easeIn,
-  });
-  tl.to(camera, {
-    // Timeline 2
-    z: 6,
-    duration: 1,
-    ease: Power3.easeInOut,
-  });
-  tl.to(camera, {
-    // Timeline 3
-    x: 3,
-    y: 3,
-    duration: 2,
-    ease: Power3.easeInOut,
-    onComplete: () => {
-      state.startBoomboxAnimation = true;
-      state.button = "dive_in";
+export const studioTextContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      delayChildren: 1,
+      staggerChildren: 0.2,
     },
-  });
+  },
 };
 
-export {
-  boomboxBounce,
-  boomboxZoomAnimation,
-  boomboxCameraBounceZoomAnimation,
+export const studioText = {
+  hidden: { translateY: 0 },
+  show: { translateY: [0, -100, 0], transition: { duration: 1 } },
 };

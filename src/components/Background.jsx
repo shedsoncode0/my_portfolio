@@ -1,15 +1,16 @@
 /** @format */
 
-import { Environment, Sphere } from "@react-three/drei";
+import { Environment, Sphere, useEnvironment } from "@react-three/drei";
 import { Gradient, LayerMaterial } from "lamina";
 import * as THREE from "three";
 import React from "react";
 import { angleToRadians } from "../utils/angle";
 
 const Background = () => {
+  const envMap = useEnvironment({ files: "/graveyard_pathways_4k.hdr"})
   return (
     <>
-      <Environment />
+      <Environment map={envMap} blur={0}/>
 
       <Sphere
         scale={[100, 100, 100]}

@@ -9,6 +9,7 @@ import { angleToRadians } from "../utils/angle";
 import { Gradient } from "lamina";
 import {
   KeyboardControls,
+  Loader,
   Scroll,
   ScrollControls,
   useScroll,
@@ -16,28 +17,14 @@ import {
 import { Physics } from "@react-three/rapier";
 import { Controls } from "../utils";
 import { useMemo } from "react";
+import LoadingScreen from "./LoadingScreen";
 
 const CanvasScene = () => {
   const canvasRef = useRef();
   const orbitControlsRef = useRef(null);
   const scroll = useScroll();
   const snap = useSnapshot(state);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    // addEventListener("pointerup")
-    // canvas.addEventListener('pointerup', () => {
-    //   if (snap.darkMode) {
-    //     orbitControlsRef.current.setAzimuthalAngle(
-    //       angleToRadians(snap.orbitBackView)
-    //     );
-    //   } else {
-    //     orbitControlsRef.current.setAzimuthalAngle(
-    //       angleToRadians(snap.orbitFrontView)
-    //     );
-    //   }
-    // });
-  }, []);
+  const [start, setStart] = useState(false);
 
   const map = useMemo(
     () => [
@@ -54,14 +41,16 @@ const CanvasScene = () => {
     <KeyboardControls map={map}>
       <Canvas shadows ref={canvasRef} className="w-screen h-screen canvas">
         <ScrollControls damping={2} eps={20}>
-          <color attach={"background"} args={[state.canvasColor]} />
-          <Suspense fallback={null}>
-            <Physics debug>
-              <Experience orbitControlsRef={orbitControlsRef} />
-            </Physics>
-          </Suspense>
+        <color attach={"background"} args={[state.canvasColor]} />
+        <fog attach="fog" args={["gray", 12, 30]} />
+        <Suspense fallback={null}>
+          <Physics debug>
+            <Experience start={start} orbitControlsRef={orbitControlsRef} />
+          </Physics>
+        </Suspense>
         </ScrollControls>
       </Canvas>
+      <LoadingScreen started={start} onStarted={() => setStart(true)} />
     </KeyboardControls>
   );
 };

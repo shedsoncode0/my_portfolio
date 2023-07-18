@@ -1,51 +1,48 @@
 /** @format */
 
 import {
+  AccumulativeShadows,
+  Box,
   Center,
+  ContactShadows,
+  Environment,
+  Html,
   OrbitControls,
   PerspectiveCamera,
-  Scroll,
-  useKeyboardControls,
+  RandomizedLight,
+  SpotLight,
+  Stage,
+  Text,
+  useEnvironment,
+  useHelper,
+  useScroll,
 } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
+import { motion as m } from "framer-motion";
 import { Bounce, Power3, Power4 } from "gsap/all";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { angleToRadians } from "../utils/angle";
-import CameraHelper from "./CameraHelper";
-import Background from "./Background";
+
+import SpaceMan from "./models/SpaceMan";
+import Moon from "./models/Moon";
+import Me from "./models/MyCharacter";
 import { useSnapshot } from "valtio";
-import TestCity from "./Test_city";
 import * as THREE from "three";
 import state from "../store";
-import Boombox from "./Box";
 import { gsap } from "gsap";
-import {
-  boomboxBounce,
-  boomboxCameraBounceZoomAnimation,
-  boomboxZoomAnimation,
-} from "../utils/animations";
 
-import {
-  Controls,
-  setCameraToCityView,
-  setModelAndCameraToMobileViwe,
-  setModelAndCameraToNormalView,
-} from "../utils";
-import Jeep from "./Jeep";
-import { RigidBody } from "@react-three/rapier";
 import Character from "./Character";
+import { useFrame } from "@react-three/fiber";
 
 const Experience = ({ orbitControlsRef }) => {
   const [boomboxScale, setBoomboxScale] = useState(1);
+  // const tl = ;
   // valtio data
   const snap = useSnapshot(state);
 
-  // Window size "width"
-  let windowsWidth;
-
   // Element Refrence
   const boomboxRef = useRef(null);
-  const cameraRef = useRef(null);
+  const cameraRef = useRef();
+  const introTextRef = useRef(null);
 
   // Resize the screen based on the phone size
   window.addEventListener("resize", (e) => {});
@@ -53,85 +50,54 @@ const Experience = ({ orbitControlsRef }) => {
   // Ref objects
   const boombox = boomboxRef.current;
   const camera = cameraRef.current;
+  const boxRef = useRef();
+  const tl = useRef();
 
-  // Gsap
-  gsap.registerPlugin(Bounce);
+  const scroll = useScroll();
 
-  // useFrame hook
-  useFrame(() => {
-    windowsWidth = window.innerWidth;
-
-    // Resizeing the screen to make it responsive
-    if (camera) {
-      if (windowsWidth < snap.deviceSize.mobile_phone) {
-        if (state.intro) {
-          setBoomboxScale(0.6);
-        }
-      } else {
-        setBoomboxScale(1);
-      }
-    }
-  });
-
-  // Animation for boombox bounce and camera bounce zoom
   useEffect(() => {
-    // if (boombox) boomboxBounce(boombox);
-    // if (camera) boomboxCameraBounceZoomAnimation(state.cameraPosition);
-    state.cameraPosition.z = 6;
-  }, [boombox]);
+    if (camera) {
+      gsap.to(camera.position, {
+        z: 7,
+        y: -1,
+        delay: 2,
+        duration: 3,
+        ease: Power3.easeOut,
+        onComplete: () => {
+          gsap.fromTo(
+            introTextRef.current,
+            {
+              top: "4px",
+            },
+            {
+              top: "0px",
+            }
+          );
+        },
+      });
+    }
+  }, [cameraRef.current]);
 
-  // Click event for the CD
-  if (state.diveIn) {
-    boomboxZoomAnimation(boombox, state.cameraPosition);
-  }
-
+  const envMap = useEnvironment({ files: "/graveyard_pathways_4k.hdr" });
+  // useHelper(camera, CameraHelper);
   return (
     <>
-      <PerspectiveCamera
-        makeDefault
-        ref={cameraRef}
-        position={[
-          snap.cameraPosition.x,
-          snap.cameraPosition.y,
-          snap.cameraPosition.z,
-        ]}
-      />
-
-      {/* OrbitControl to move the secene around */}
+      <PerspectiveCamera position={[0, 7, 0]} makeDefault ref={cameraRef} />
+      <spotLight angle={Math.PI / 2} intensity={2} />
       <OrbitControls
-        ref={orbitControlsRef}
+        enableZoom={false}
         makeDefault
         enablePan={false}
-        // enableRotate={false}
-        // enableZoom={false}
         rotateSpeed={1}
       />
-      {/* <Background /> */}
-      {/* <ambientLight intensity={0.5} /> */}
-      <directionalLight
-        intensity={1}
-        position={[0, 200, 300]}
-        castShadow={true}
-        receiveShadow
-        color="white"
+      <SpaceMan scale={0.5} position={[0, -1, 0]} />
+      <Moon
+        scale={0.4}
+        position={[0, -5, 0]}
+        rotation={[angleToRadians(90), 0, 0]}
       />
-
-      {/* Main Character */}
-      <Character />
-
-      <TestCity
-        position={[
-          snap.city.position.x,
-          snap.city.position.y,
-          snap.city.position.z,
-        ]}
-        castShadow
-        receiveShadow
-      />
-      {/* <Boombox scale={boomboxScale} boomboxRef={boomboxRef} /> */}
-      {/* </Center> */}
-
-      {/* <CameraHelper cameraP={state.cameraPosition} /> */}
+      <Text>I'm shedrach</Text>
+      {/* <Environment map={envMap} blur={100} /> */}
     </>
   );
 };
