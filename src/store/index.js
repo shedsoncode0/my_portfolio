@@ -17,10 +17,12 @@ const state = proxy({
     mobile_phone: 500,
     tablet_phone: 800,
   },
-  cameraPosition: {
-    x: 0,
-    y: 0,
-    z: 0, // default 10
+  camera: {
+    position: {
+      x: 0,
+      y: 0,
+      z: 9, // d
+    },
   },
   cameraHelper: {
     x: 0,
