@@ -39,18 +39,18 @@ const CanvasScene = () => {
 
   return (
     <KeyboardControls map={map}>
-      <Canvas shadows ref={canvasRef} className="w-screen h-screen canvas">
-        <ScrollControls damping={2} eps={20}>
+      <Canvas shadows  ref={canvasRef} className="w-screen h-screen canvas">
+        {/* <ScrollControls damping={2} eps={20}> */}
         <color attach={"background"} args={[state.canvasColor]} />
-        <fog attach="fog" args={["gray", 12, 30]} />
+        {/* <fog attach="fog" args={["gray", 12, 30]} /> */}
         <Suspense fallback={null}>
           <Physics debug>
             <Experience start={start} orbitControlsRef={orbitControlsRef} />
           </Physics>
         </Suspense>
-        </ScrollControls>
+        {/* </ScrollControls> */}
       </Canvas>
-      <LoadingScreen started={start} onStarted={() => setStart(true)} />
+      {/* <LoadingScreen started={start} onStarted={() => setStart(true)} /> */}
     </KeyboardControls>
   );
 };

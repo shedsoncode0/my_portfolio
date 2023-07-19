@@ -1,24 +1,22 @@
 /** @format */
 
 import state from "../store";
+import * as THREE from "three";
 
-const setCameraToCityView = (snap) => {
-  state.cameraPosition.z = snap.cityCamera.position.z;
-  state.cameraPosition.x = snap.cityCamera.position.x;
-  state.cameraPosition.y = snap.cityCamera.position.y;
-};
-
-const setModelAndCameraToMobileViwe = (snap) => {
-  if (window.innerWidth < 500) {
-    state.cameraPosition.y = 1;
-    state.cameraPosition.z = 4;
-  }
-};
-const setModelAndCameraToNormalView = (snap) => {
-  if (window.innerWidth > 500) {
-    state.cameraPosition.y = 0;
-    state.cameraPosition.z = 4;
-  }
+const standardMaterial = ({
+  color,
+  metalness = 0,
+  roughness = 1,
+  emissive = false,
+  emissiveIntensity = 0,
+}) => {
+  return new THREE.MeshStandardMaterial({
+    color,
+    metalness,
+    roughness,
+    emissive,
+    emissiveIntensity,
+  });
 };
 
 const Controls = {
@@ -27,10 +25,16 @@ const Controls = {
   left: "left",
   right: "right",
   jump: "jump",
+  accelerate: "accelerate",
 };
-export {
-  Controls,
-  setCameraToCityView,
-  setModelAndCameraToMobileViwe,
-  setModelAndCameraToNormalView,
+
+const changeEditProperty = (propertyName, state) => {
+  state.car.property.name = propertyName;
+  if (state.car.property.name === propertyName) {
+  }
 };
+
+const moveObjectByImpulse = ({ object, x, y, z }) => {
+  object.current.applyImpulse({ x, y, z });
+};
+export { Controls, standardMaterial, moveObjectByImpulse };
