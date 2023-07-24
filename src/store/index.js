@@ -4,6 +4,7 @@ import { proxy } from "valtio";
 
 const state = proxy({
   intro: true,
+  introAnimationDone: false,
   darkMode: false,
   orbitFrontView: 0,
   orbitBackView: 210,
@@ -16,6 +17,11 @@ const state = proxy({
   deviceSize: {
     mobile_phone: 500,
     tablet_phone: 800,
+  },
+  planeLandPosition: {
+    x: 0, 
+    y: -0.55,
+    z: 7
   },
   camera: {
     position: {
@@ -50,18 +56,14 @@ const state = proxy({
     position: {
       x: 0,
       y: 0,
-      z: -5,
+      z: 0,
     },
     rotation: {
-      x: -2,
-      y: -2.22,
-      z: -2,
-    },
-    tireRotation: {
       x: 0,
       y: 0,
       z: 0,
     },
+    speed: 0.0005,
   },
 });
 

@@ -25,6 +25,7 @@ const Controls = {
   left: "left",
   right: "right",
   shift: "run",
+  space: "jump",
 };
 
 const changeEditProperty = (propertyName, state) => {

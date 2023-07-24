@@ -25,6 +25,7 @@ const CanvasScene = () => {
   const scroll = useScroll();
   const snap = useSnapshot(state);
   const [start, setStart] = useState(false);
+  const [dpr, setDpr] = useState(1.5);
 
   const map = useMemo(
     () => [
@@ -33,6 +34,7 @@ const CanvasScene = () => {
       { name: Controls.left, keys: ["ArrowLeft", "KeyA"] },
       { name: Controls.right, keys: ["ArrowRight", "KeyD"] },
       { name: Controls.shift, keys: ["Shift"] },
+      { name: Controls.space, keys: ["Space"] },
     ],
     []
   );
@@ -40,17 +42,15 @@ const CanvasScene = () => {
   return (
     <KeyboardControls map={map}>
       <Canvas shadows  ref={canvasRef} className="w-screen h-screen canvas">
-        {/* <ScrollControls damping={2} eps={20}> */}
         <color attach={"background"} args={[state.canvasColor]} />
-        {/* <fog attach="fog" args={["gray", 12, 30]} /> */}
+        {/* <fog attach="fog" args={["#fff4e7", 3, 18]} /> */}
         <Suspense fallback={null}>
-          <Physics debug>
+          <Physics>
             <Experience start={start} orbitControlsRef={orbitControlsRef} />
           </Physics>
         </Suspense>
-        {/* </ScrollControls> */}
       </Canvas>
-      <LoadingScreen started={start} onStarted={() => setStart(true)} />
+      {/* <LoadingScreen started={start} onStarted={() => setStart(true)} /> */}
     </KeyboardControls>
   );
 };
