@@ -8,6 +8,7 @@ import { gsap } from "gsap";
 import MouseAnimation from "./components/MouseAnimation";
 import { Joystick } from "react-joystick-component";
 import ImageSlider from "./components/ImageSlider";
+import ContactMe from "./components/ContactMe";
 
 function App() {
   const snap = useSnapshot(state);
@@ -17,7 +18,9 @@ function App() {
   return (
     <main className="w-screen h-screen relative">
       <CanvasScene />
-      {/* <ImageSlider /> */}
+
+      {snap.showPopup.name === "projects" && <ImageSlider />}
+      {snap.showPopup.name === "contact" && <ContactMe />}
     </main>
   );
 }

@@ -26,6 +26,7 @@ const Controls = {
   right: "right",
   shift: "run",
   space: "jump",
+  enter: "enter",
 };
 
 const changeEditProperty = (propertyName, state) => {
@@ -35,6 +36,6 @@ const changeEditProperty = (propertyName, state) => {
 };
 
 const moveObjectByImpulse = ({ object, x, y, z }) => {
-  object.current.applyImpulse({ x, y, z });
+  object.current.applyImpulse({ x, y, z }, true);
 };
 export { Controls, standardMaterial, moveObjectByImpulse };

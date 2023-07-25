@@ -4,6 +4,10 @@ import { proxy } from "valtio";
 
 const state = proxy({
   intro: true,
+  showPopup: {
+    show: false,
+    name: "",
+  },
   introAnimationDone: false,
   darkMode: false,
   orbitFrontView: 0,
@@ -19,9 +23,9 @@ const state = proxy({
     tablet_phone: 800,
   },
   planeLandPosition: {
-    x: 0, 
+    x: 0,
     y: -0.55,
-    z: 7
+    z: 7,
   },
   camera: {
     position: {

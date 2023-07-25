@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import BunnyPlay from "../assets/projectImage/bunnyplay.png";
+import state from "../store";
 
 const ImageSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [Projects, setProjects] = useState([
     {
       url: "fundafriend.xyz",
-      image: "/image.jpeg",
-      name: "`Fundafriend",
-      type: "",
+      image: BunnyPlay,
+      name: "Bunnyplay",
+      productType: "Music-Player",
+      type: "Web-App",
     },
     {
       url: "fundafriend.xyz",
@@ -29,19 +32,39 @@ const ImageSlider = () => {
     );
   };
   return (
-    <div className="w-screen flex justify-center h-screen fixed top-0 p-10 left-0 bg-black/90 backdrop-blur-sm">
-      <div className="max-w-xl flex-col w-full flex justify-center items-center gap-10">
-          {/* <img src="/image.jpeg" className="object-cover" alt="image" /> */}
+    <div
+      onClick={() => (state.showPopup = { name: "", show: false })}
+      className="w-screen flex justify-center h-screen fixed top-0 p-10 left-0 bg-black/90 backdrop-blur-sm"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="max-w-xl flex-col w-full flex justify-center items-center gap-10"
+      >
+        {/* {Projects.map((item, index) => (
+        ))} */}
+        <div className="w-full text-center text-white">
+          <h1 className="font-bold text-2xl">Bunnyplay</h1>
+          <p className="font-normal">Fin-tech - Mobile/Web</p>
+        </div>
+
         <div className="w-full overflow-hidden object-cover max-w-2xl bg-slate-400 flex-1 rounded-lg ">
-          {Projects.map((items, index) => (
-            <div
-              key={index}
-              className={`slider-slide ${
-                index === currentSlide ? "active" : "hidden"
-              }`}
-            >
-              <img src={items.image} className="object-cover" alt="image" />
-            </div>
+          {Projects.map((item, index) => (
+            <>
+              <div
+                key={index}
+                className={`slider-slide object-cover  h-full w-full ${
+                  index === currentSlide ? "active" : "hidden"
+                }`}
+              >
+                <a href={item.url} target="_blank">
+                  <img
+                    src={item.image}
+                    className="object-cover w-full h-full"
+                    alt="image"
+                  />
+                </a>
+              </div>
+            </>
           ))}
         </div>
         <div className="flex gap-2">

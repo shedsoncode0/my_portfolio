@@ -1,22 +1,15 @@
 /** @format */
 
 import {
-  Box,
   Center,
-  Cloud,
-  Environment,
   Float,
   Line,
   OrbitControls,
   PerspectiveCamera,
   Plane,
-  Ring,
   Sky,
-  SoftShadows,
-  Stars,
   Text,
   Text3D,
-  useEnvironment,
   useKeyboardControls,
 } from "@react-three/drei";
 import { motion as m } from "framer-motion";
@@ -30,16 +23,16 @@ import * as THREE from "three";
 import state from "../store";
 import { gsap } from "gsap";
 import { useFrame } from "@react-three/fiber";
-import Background from "./Background";
 import { Controls, moveObjectByImpulse } from "../utils";
 import Lights from "./Lights";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { useMemo } from "react";
 import Effects from "./Effects";
+import EnterBuildingsPlatforms from "./EnterBuildingsPlatforms";
 
 const LINE_NB_POINTS = 12000;
 
-const Experience = ({ orbitControlsRef }) => {
+const Experience = () => {
   const curve = useMemo(() => {
     return new THREE.CatmullRomCurve3(
       [
@@ -85,6 +78,7 @@ const Experience = ({ orbitControlsRef }) => {
   const rightPressed = useKeyboardControls((state) => state[Controls.right]);
   const shift = useKeyboardControls((state) => state[Controls.shift]);
   const space = useKeyboardControls((state) => state[Controls.space]);
+  const enter = useKeyboardControls((state) => state[Controls.enter]);
 
   const ps = new THREE.Vector3();
   const cameraLookAtVector = new THREE.Vector3();
@@ -166,9 +160,9 @@ const Experience = ({ orbitControlsRef }) => {
 
     // cameraRef.current.quaternion.slerp(targetCameraQuaternion, 0.523 * 2);
     if (shift) {
-      state.character.speed = 0.00022 ;
+      state.character.speed = 0.00022;
     } else {
-      state.character.speed = 0.00017;
+      state.character.speed = 0.0005; //0.00017
     }
 
     if (space) {
@@ -245,7 +239,7 @@ const Experience = ({ orbitControlsRef }) => {
         // enableRotate={false}
         // enableDamping={false}
         makeDefault
-        enablePan={false}
+        // enablePan={false}
         rotateSpeed={1}
       />
       <Sky
@@ -263,9 +257,24 @@ const Experience = ({ orbitControlsRef }) => {
             state.introAnimationDone = true;
             state.planeLandPosition.y = -1;
           }
+
+          if (other.rigidBodyObject.name === "projectPlatform") {
+            if (enter) {
+              alert("dj");
+            }
+            state.showPopup.name = "projects";
+          }
+
+          if (other.rigidBodyObject.name === "contactPlatform") {
+            state.showPopup.name = "contact";
+          }
         }}
         onCollisionExit={({ other }) => {
-          if (other.rigidBodyObject.name === "ground") {
+          if (
+            other.rigidBodyObject.name === "projectPlatform" ||
+            other.rigidBodyObject.name === "contactPlatform"
+          ) {
+            state.showPopup.name = "";
           }
         }}
         ref={characterRef}
@@ -274,9 +283,9 @@ const Experience = ({ orbitControlsRef }) => {
         type="dynamic"
         canSleep={false}
         restitution={0.1}
-        friction={0}
+        // friction={0}
         // linearVelocity={[0.5, 0.5, 0.5]}
-        linearDamping={3}
+        linearDamping={1}
         lockRotations
       >
         <CuboidCollider position={[0, 0.1, 0]} args={[0.05, 0.1, 0.05]} />
@@ -301,7 +310,7 @@ const Experience = ({ orbitControlsRef }) => {
         name="planeLand"
       >
         <Plane args={[1, 0.4, 1]}>
-          <meshStandardMaterial transparent={true} />
+          <meshStandardMaterial opacity={0.0} transparent={true} />
         </Plane>
       </RigidBody>
 
@@ -330,7 +339,7 @@ const Experience = ({ orbitControlsRef }) => {
         angularDamping={1}
         linearDamping={0.3}
         lockRotations
-        
+
         // enabledRotations={[false,true,false]}
       >
         <CuboidCollider
@@ -343,23 +352,7 @@ const Experience = ({ orbitControlsRef }) => {
         </Center>
       </RigidBody>
 
-      <RigidBody
-        type="fixed"
-        canSleep={false}
-        angularDamping={1}
-        linearDamping={0.3}
-        lockRotations
-        position={[0.1, -0.54, 0.5]}
-      >
-        <Text
-          rotation={[angleToRadians(-90), 0, 0]}
-          position={[0, 0.01, 0]}
-          scale={0.06}
-        >
-          ENTER
-        </Text>
-        <Platform scale={0.1} />
-      </RigidBody>
+      <EnterBuildingsPlatforms />
 
       <Zeppelin />
 

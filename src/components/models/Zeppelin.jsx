@@ -17,15 +17,20 @@ export default function Zeppelin(props) {
   const { actions, names, ref } = useAnimations(animations, group);
 
   useFrame((state, deltal) => {
-    group.current.position.x -= 0.002
-    group.current.rotation.y -= 0.002
-  })
+    group.current.position.x -= 0.002;
+    group.current.rotation.y -= 0.002;
+  });
 
   useEffect(() => {
-    actions[names[0]].reset().play();
+    actions["Fans"].reset().play();
   }, []);
   return (
-    <group position={[0,2,0-5]} rotation={[0,angleToRadians(120),0]} ref={group} dispose={null}>
+    <group
+      position={[0, 2, 0 - 5]}
+      rotation={[0, angleToRadians(120), 0]}
+      ref={group}
+      dispose={null}
+    >
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
           <mesh

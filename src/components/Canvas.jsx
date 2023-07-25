@@ -35,13 +35,14 @@ const CanvasScene = () => {
       { name: Controls.right, keys: ["ArrowRight", "KeyD"] },
       { name: Controls.shift, keys: ["Shift"] },
       { name: Controls.space, keys: ["Space"] },
+      { name: Controls.enter, keys: ["Enter"] },
     ],
     []
   );
 
   return (
     <KeyboardControls map={map}>
-      <Canvas shadows  ref={canvasRef} className="w-screen h-screen canvas">
+      <Canvas shadows ref={canvasRef} className="w-screen h-screen canvas">
         <color attach={"background"} args={[state.canvasColor]} />
         {/* <fog attach="fog" args={["#fff4e7", 3, 18]} /> */}
         <Suspense fallback={null}>
@@ -50,7 +51,7 @@ const CanvasScene = () => {
           </Physics>
         </Suspense>
       </Canvas>
-      <LoadingScreen started={start} onStarted={() => setStart(true)} />
+      {/* <LoadingScreen started={start} onStarted={() => setStart(true)} /> */}
     </KeyboardControls>
   );
 };
