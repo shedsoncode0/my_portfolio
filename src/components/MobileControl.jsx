@@ -14,31 +14,31 @@ import {
 const MobileControl = () => {
   const { setMove } = useContext(AppContext);
   return (
-    <section className="w-full p-4 fixed bottom-0 left-0 flex justify-between">
-      <div className="w-[200px] h-[200px] p-3 backdrop-blur-sm rounded-full bg-slate-300/30 block  lg:hidden">
+    <section className="w-full p-4 fixed bottom-0 left-0 items-center flex justify-between">
+      <div className="space-y-3 p-3 backdrop-blur-sm rounded-full bg-slate-300/30 block  lg:hidden">
         <div className="w-full flex justify-center">
           <button
             onPointerDown={() => setMove({ forward: true })}
             onPointerUp={() => setMove({ forward: false })}
             className="cursor-pointer outline-none rounded-full bg-white "
           >
-            <HiArrowCircleUp size={55} />
+            <HiArrowCircleUp size={45} />
           </button>
         </div>
-        <div className="w-full flex justify-between">
+        <div className="w-full gap-5 flex justify-between">
           <button
             onPointerDown={() => setMove({ left: true })}
             onPointerUp={() => setMove({ left: false })}
             className="cursor-pointer outline-none rounded-full bg-white "
           >
-            <HiArrowCircleLeft size={55} />
+            <HiArrowCircleLeft size={45} />
           </button>
           <button
             onPointerDown={() => setMove({ right: true })}
             onPointerUp={() => setMove({ right: false })}
             className="cursor-pointer outline-none rounded-full bg-white "
           >
-            <HiArrowCircleRight size={55} />
+            <HiArrowCircleRight size={45} />
           </button>
         </div>
         <div className="w-full flex justify-center">
@@ -47,24 +47,24 @@ const MobileControl = () => {
             onPointerUp={() => setMove({ backward: false })}
             className="cursor-pointer outline-none rounded-full bg-white "
           >
-            <HiArrowCircleDown size={55} />
+            <HiArrowCircleDown size={45} />
           </button>
         </div>
       </div>
 
       <div className="text-white flex flex-col flex-1 justify-between items-end gap-5">
         <div  onPointerDown={() => setMove({ run: true })}
-            onPointerUp={() => setMove({ run: false })} className=" py-5 w-16 cursor-pointer text-center backdrop-blur-sm bg-slate-300/30 rounded-lg flex justify-center items-center">
-          <BiRun size={50}/>
+            onPointerUp={() => setMove({ run: false })} className=" py-5 w-[50px] cursor-pointer text-center backdrop-blur-sm bg-slate-300/30 rounded-lg flex justify-center items-center">
+          <BiRun size={40}/>
         </div>
         <div  onPointerDown={() => setMove({ jump: true })}
-            onPointerUp={() => setMove({ jump: false })} className="py-9 w-16 cursor-pointer text-center backdrop-blur-sm bg-slate-300/30 rounded-lg flex justify-center items-center">
+            onPointerUp={() => setMove({ jump: false })} className="py-5 w-[50px] cursor-pointer text-center backdrop-blur-sm bg-slate-300/30 rounded-lg flex justify-center items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             enable-background="new 0 0 123.711 139.059"
             viewBox="0 0 123.711 139.059"
             id="jumping-kid"
-            className="text-white w-10 h-10"
+            className="text-white w-9 h-9"
             color="white"
             fill="white"
           >
