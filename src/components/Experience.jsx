@@ -29,10 +29,13 @@ import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { useMemo } from "react";
 import Effects from "./Effects";
 import EnterBuildingsPlatforms from "./EnterBuildingsPlatforms";
+import { useContext } from "react";
+import { AppContext } from "../contexts/AppContext";
 
 const LINE_NB_POINTS = 12000;
 
 const Experience = () => {
+  const { move } = useContext(AppContext);
   const curve = useMemo(() => {
     return new THREE.CatmullRomCurve3(
       [
@@ -165,7 +168,7 @@ const Experience = () => {
       state.character.speed = 0.0005; //0.00017
     }
 
-    if (space) {
+    if (space || move.jump) {
       // setAnimationName("Walking");
       moveObjectByImpulse({
         object: characterRef,
@@ -177,7 +180,7 @@ const Experience = () => {
       setDirection("front");
     }
 
-    if (forwardPressed) {
+    if (forwardPressed || move.forward) {
       setAnimationName("Walking");
       moveObjectByImpulse({
         object: characterRef,
@@ -188,7 +191,7 @@ const Experience = () => {
       characterModelRef.current.rotation.y = angleToRadians(0);
       setDirection("front");
     }
-    if (backwardPressed) {
+    if (backwardPressed || move.backward) {
       setAnimationName("Walking");
       moveObjectByImpulse({
         object: characterRef,
@@ -199,7 +202,7 @@ const Experience = () => {
       characterModelRef.current.rotation.y = angleToRadians(180);
       setDirection("back");
     }
-    if (leftPressed) {
+    if (leftPressed || move.left) {
       moveObjectByImpulse({
         object: characterRef,
         x: -snap.character.speed,
@@ -209,7 +212,7 @@ const Experience = () => {
       characterModelRef.current.rotation.y = angleToRadians(80);
       setDirection("left");
     }
-    if (rightPressed) {
+    if (rightPressed || move.right) {
       moveObjectByImpulse({
         object: characterRef,
         x: snap.character.speed,
@@ -262,11 +265,12 @@ const Experience = () => {
             if (enter) {
               alert("dj");
             }
-            state.showPopup.name = "projects";
+
+            state.showPopup = { name: "projects", show: true };
           }
 
           if (other.rigidBodyObject.name === "contactPlatform") {
-            state.showPopup.name = "contact";
+            state.showPopup = { name: "contact", show: true };
           }
         }}
         onCollisionExit={({ other }) => {
@@ -274,7 +278,7 @@ const Experience = () => {
             other.rigidBodyObject.name === "projectPlatform" ||
             other.rigidBodyObject.name === "contactPlatform"
           ) {
-            state.showPopup.name = "";
+            state.showPopup = { name: "", show: false };
           }
         }}
         ref={characterRef}

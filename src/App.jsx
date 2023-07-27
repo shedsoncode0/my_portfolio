@@ -9,6 +9,9 @@ import MouseAnimation from "./components/MouseAnimation";
 import { Joystick } from "react-joystick-component";
 import ImageSlider from "./components/ImageSlider";
 import ContactMe from "./components/ContactMe";
+import { useContext } from "react";
+import { AppContext } from "./contexts/AppContext";
+import MobileControl from "./components/MobileControl";
 
 function App() {
   const snap = useSnapshot(state);
@@ -21,6 +24,8 @@ function App() {
 
       {snap.showPopup.name === "projects" && <ImageSlider />}
       {snap.showPopup.name === "contact" && <ContactMe />}
+      {!snap.showPopup.show && <MobileControl />}
+      
     </main>
   );
 }

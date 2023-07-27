@@ -16,8 +16,11 @@ import { useState } from "react";
 import { Controls } from "../../utils";
 import { useFrame } from "@react-three/fiber";
 import state from "../../store";
+import { useContext } from "react";
+import { AppContext } from "../../contexts/AppContext";
 
 export default function Me({ props, characterRef, landed, setLanded }) {
+  const { move } = useContext(AppContext);
   const { nodes, materials } = useGLTF("/me.glb");
   const [animationName, setAnimationName] = useState("");
   const [characterLanded, setCharacterLanded] = useState(landed);
@@ -62,23 +65,23 @@ export default function Me({ props, characterRef, landed, setLanded }) {
 
   useFrame(() => {
     if (landed === "") {
-      if (shift) {
+      if (shift || move.run) {
         setAnimationName("Running");
-      } else if (forwardPressed) {
+      } else if (forwardPressed || move.forward) {
         setAnimationName("Walking");
-      } else if (leftPressed) {
+      } else if (leftPressed || move.backward) {
         setAnimationName("Walking");
-      } else if (rightPressed) {
+      } else if (rightPressed || move.right) {
         setAnimationName("Walking");
-      } else if (backwardPressed) {
+      } else if (backwardPressed || move.left) {
         setAnimationName("Walking");
-      }  else {
+      } else {
         // if (animationName === "Jump") {
         //   setTimeout(() => {
         //     setAnimationName("Idle");
         //   }, 2400);
         // } else {
-          setAnimationName("Idle");
+        setAnimationName("Idle");
         // }
       }
     }
@@ -94,7 +97,6 @@ export default function Me({ props, characterRef, landed, setLanded }) {
         setAnimationName("Idle");
       }, 10000);
     } else {
-      
     }
   });
 
