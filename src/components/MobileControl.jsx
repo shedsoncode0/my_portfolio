@@ -14,8 +14,8 @@ import {
 const MobileControl = () => {
   const { setMove } = useContext(AppContext);
   return (
-    <section className="w-full p-4 fixed bottom-0 left-0 items-center flex justify-between">
-      <div className="space-y-3 p-3 backdrop-blur-sm rounded-full bg-slate-300/30 block  lg:hidden">
+    <section className="w-full p-4 fixed bottom-0 left-0 items-center justify-between flex  lg:hidden">
+      <div className="space-y-3 p-3 backdrop-blur-sm rounded-full bg-slate-300/30">
         <div className="w-full flex justify-center">
           <button
             onPointerDown={() => setMove({ forward: true })}

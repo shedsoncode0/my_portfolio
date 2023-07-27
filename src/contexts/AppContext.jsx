@@ -9,10 +9,14 @@ export const AppProvider = ({ children }) => {
     left: false,
     right: false,
     jump: false,
-    run: false
+    run: false,
+  });
+  const [speed, setSpeed] = useState({
+    runSpeed: 0,
+    walkSpeed: 0,
   });
   return (
-    <AppContext.Provider value={{ move, setMove }}>
+    <AppContext.Provider value={{ move, setMove, speed, setSpeed }}>
       {children}
     </AppContext.Provider>
   );

@@ -35,7 +35,7 @@ import { AppContext } from "../contexts/AppContext";
 const LINE_NB_POINTS = 12000;
 
 const Experience = () => {
-  const { move } = useContext(AppContext);
+  const { move, speed } = useContext(AppContext);
   const curve = useMemo(() => {
     return new THREE.CatmullRomCurve3(
       [
@@ -163,9 +163,9 @@ const Experience = () => {
 
     // cameraRef.current.quaternion.slerp(targetCameraQuaternion, 0.523 * 2);
     if (shift) {
-      state.character.speed = 0.00022;
+      state.character.speed = speed.runSpeed;
     } else {
-      state.character.speed = 0.0005; //0.00017
+      state.character.speed = speed.walkSpeed; //0.00017
     }
 
     if (space || move.jump) {
@@ -289,7 +289,7 @@ const Experience = () => {
         restitution={0.1}
         // friction={0}
         // linearVelocity={[0.5, 0.5, 0.5]}
-        linearDamping={1}
+        linearDamping={5}
         lockRotations
       >
         <CuboidCollider position={[0, 0.1, 0]} args={[0.05, 0.1, 0.05]} />
