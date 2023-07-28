@@ -50,7 +50,7 @@ const LoadingScreen = ({ onStarted, started }) => {
       className={
         started
           ? "hidden"
-          : "fixed top-0 left-0 right-0 bottom-0 bg-black flex justify-center items-center w-screen h-screen "
+          : "fixed z-[9999999999999999] top-0 left-0 right-0 bottom-0 bg-black flex justify-center items-center w-screen h-screen "
       }
     >
       <div>
