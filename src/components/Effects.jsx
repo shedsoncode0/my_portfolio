@@ -7,6 +7,7 @@ import {
   useEnvironment,
 } from "@react-three/drei";
 import React from "react";
+import Lights from "./Lights";
 
 const Effects = () => {
   const envMap = useEnvironment({ files: "/industrial_sunset_puresky_4k.hdr" });
@@ -24,10 +25,11 @@ const Effects = () => {
         loop
         // All THREE.PositionalAudio props are valid
       /> */}
+      <Lights />
       <Stars radius={500} depth={50} count={1000} factor={10} />
       <SoftShadows size={130} samples={20} focus={0} />
       <axesHelper />
-      <Environment map={envMap} blur={0} />
+      {/* <Environment map={envMap} blur={0} /> */}
     </>
   );
 };

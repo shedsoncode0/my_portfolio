@@ -17,7 +17,7 @@ import { Bounce, Power3, Power4 } from "gsap/all";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { angleToRadians } from "../utils/angle";
 
-import { Billboard, CityD, Me, Pin, Platform, Zeppelin } from "./models";
+import { Billboard, CityD, Jeep, Me, Pin, Platform, Zeppelin } from "./models";
 import { useSnapshot } from "valtio";
 import * as THREE from "three";
 import state from "../store";
@@ -236,7 +236,7 @@ const Experience = () => {
         makeDefault
         ref={cameraRef}
       />
-      {/* <Lights /> */}
+     
       <OrbitControls
         // enableZoom={false}
         // enableRotate={false}

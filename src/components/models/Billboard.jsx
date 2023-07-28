@@ -6,126 +6,387 @@ source: https://sketchfab.com/3d-models/billboard-b36564cd33564034bdcff3fb79e2f6
 title: Billboard
 */
 
-import React, { useRef } from 'react'
-import { useGLTF, useTexture } from '@react-three/drei'
+import React, { useRef } from "react";
+import { Plane, useGLTF, useTexture } from "@react-three/drei";
 
 export default function Billboard(props) {
-  const group = useRef()
-  const texture = useTexture("/image.jpeg")
-  const { nodes, materials } = useGLTF('/billboard.glb')
+  const group = useRef();
+  const texture = useTexture("/image.jpeg");
+  const { nodes, materials } = useGLTF("/billboard.glb");
   return (
     <group ref={group} {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
-          <group position={[1.85, 8.65, 0]} rotation={[0, 0, -Math.PI / 2]} scale={[3.79, 2.72, 8.61]}>
+          <group
+            position={[1.85, 8.65, 0]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[3.79, 2.72, 8.61]}
+          >
             {/* screen */}
-            <mesh castShadow receiveShadow  geometry={nodes.Object_4.geometry}>
-            <meshStandardMaterial map={texture} toneMapped={false}/>
+            <mesh castShadow receiveShadow geometry={nodes.Object_4.geometry}>
+              <meshStandardMaterial color={"white"} />
             </mesh>
           </group>
+
+          <group
+            position={[1.89, 8.65, 0]}
+            rotation={[0, Math.PI / 2, 0]}
+            scale={[3, 2.5, 8.61]}
+          >
+            {/* screen */}
+            <Plane args={[3, 3, 3]}>
+              <meshStandardMaterial map={texture} toneMapped={false} />
+            </Plane>
+          </group>
+
           <group position={[1.74, 8.62, -0.06]} scale={[0.07, 4.18, 9.08]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_6.geometry} material={nodes.Object_6.material} />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_6.geometry}
+              material={nodes.Object_6.material}
+            />
           </group>
           <group position={[-0.04, 4.02, 4.79]} scale={[1, 0.11, 1]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_8.geometry} material={nodes.Object_8.material} />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_8.geometry}
+              material={nodes.Object_8.material}
+            />
           </group>
           <group position={[0, 4.17, 0]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_10.geometry} material={nodes.Object_10.material} />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_10.geometry}
+              material={nodes.Object_10.material}
+            />
           </group>
           <group position={[0, 0.84, -4.89]} scale={[0.57, 2.65, 0.57]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_12.geometry} material={nodes.Object_12.material} />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_12.geometry}
+              material={nodes.Object_12.material}
+            />
           </group>
           <group position={[-0.04, 4.02, -4.87]} scale={[1, 0.11, 1]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_14.geometry} material={nodes.Object_14.material} />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_14.geometry}
+              material={nodes.Object_14.material}
+            />
           </group>
           <group position={[-1.07, 8.67, -8.79]} scale={[0.21, 4.62, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_16.geometry} material={nodes.Object_16.material} />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_16.geometry}
+              material={nodes.Object_16.material}
+            />
           </group>
           <group position={[1.07, 8.67, -8.79]} scale={[0.21, 4.62, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_18.geometry} material={nodes.Object_18.material} />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_18.geometry}
+              material={nodes.Object_18.material}
+            />
           </group>
           <group position={[1.07, 8.67, 8.8]} scale={[0.21, 4.62, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_20.geometry} material={nodes.Object_20.material} />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_20.geometry}
+              material={nodes.Object_20.material}
+            />
           </group>
           <group position={[-1.07, 8.67, 8.8]} scale={[0.21, 4.62, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_22.geometry} material={nodes.Object_22.material} />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_22.geometry}
+              material={nodes.Object_22.material}
+            />
           </group>
-          <group position={[-1.07, 13.46, 0.07]} rotation={[Math.PI / 2, 0, 0]} scale={[0.21, 9.07, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_24.geometry} material={nodes.Object_24.material} />
+          <group
+            position={[-1.07, 13.46, 0.07]}
+            rotation={[Math.PI / 2, 0, 0]}
+            scale={[0.21, 9.07, 0.21]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_24.geometry}
+              material={nodes.Object_24.material}
+            />
           </group>
-          <group position={[-1.07, 7.23, 0.07]} rotation={[Math.PI / 2, 0, 0]} scale={[0.21, 9.07, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_26.geometry} material={nodes.Object_26.material} />
+          <group
+            position={[-1.07, 7.23, 0.07]}
+            rotation={[Math.PI / 2, 0, 0]}
+            scale={[0.21, 9.07, 0.21]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_26.geometry}
+              material={nodes.Object_26.material}
+            />
           </group>
-          <group position={[-1.07, 10.55, 0.07]} rotation={[Math.PI / 2, 0, 0]} scale={[0.21, 9.07, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_28.geometry} material={nodes.Object_28.material} />
+          <group
+            position={[-1.07, 10.55, 0.07]}
+            rotation={[Math.PI / 2, 0, 0]}
+            scale={[0.21, 9.07, 0.21]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_28.geometry}
+              material={nodes.Object_28.material}
+            />
           </group>
-          <group position={[1.44, 4.26, -8.79]} rotation={[0, 0, -Math.PI / 2]} scale={[0.21, 0.58, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_30.geometry} material={nodes.Object_30.material} />
+          <group
+            position={[1.44, 4.26, -8.79]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.21, 0.58, 0.21]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_30.geometry}
+              material={nodes.Object_30.material}
+            />
           </group>
-          <group position={[1.44, 4.26, 8.8]} rotation={[0, 0, -Math.PI / 2]} scale={[0.21, 0.58, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_32.geometry} material={nodes.Object_32.material} />
+          <group
+            position={[1.44, 4.26, 8.8]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.21, 0.58, 0.21]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_32.geometry}
+              material={nodes.Object_32.material}
+            />
           </group>
-          <group position={[0.02, 7.23, -8.79]} rotation={[0, 0, -Math.PI / 2]} scale={[0.21, 1.27, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_34.geometry} material={nodes.Object_34.material} />
+          <group
+            position={[0.02, 7.23, -8.79]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.21, 1.27, 0.21]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_34.geometry}
+              material={nodes.Object_34.material}
+            />
           </group>
-          <group position={[0.02, 10.54, -8.79]} rotation={[0, 0, -Math.PI / 2]} scale={[0.21, 1.27, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_36.geometry} material={nodes.Object_36.material} />
+          <group
+            position={[0.02, 10.54, -8.79]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.21, 1.27, 0.21]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_36.geometry}
+              material={nodes.Object_36.material}
+            />
           </group>
-          <group position={[0.02, 13.46, -8.79]} rotation={[0, 0, -Math.PI / 2]} scale={[0.21, 1.27, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_38.geometry} material={nodes.Object_38.material} />
+          <group
+            position={[0.02, 13.46, -8.79]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.21, 1.27, 0.21]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_38.geometry}
+              material={nodes.Object_38.material}
+            />
           </group>
-          <group position={[0.02, 13.47, 8.8]} rotation={[0, 0, -Math.PI / 2]} scale={[0.21, 1.27, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_40.geometry} material={nodes.Object_40.material} />
+          <group
+            position={[0.02, 13.47, 8.8]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.21, 1.27, 0.21]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_40.geometry}
+              material={nodes.Object_40.material}
+            />
           </group>
-          <group position={[0.02, 10.55, 8.8]} rotation={[0, 0, -Math.PI / 2]} scale={[0.21, 1.27, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_42.geometry} material={nodes.Object_42.material} />
+          <group
+            position={[0.02, 10.55, 8.8]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.21, 1.27, 0.21]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_42.geometry}
+              material={nodes.Object_42.material}
+            />
           </group>
-          <group position={[0.02, 7.23, 8.8]} rotation={[0, 0, -Math.PI / 2]} scale={[0.21, 1.27, 0.21]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_44.geometry} material={nodes.Object_44.material} />
+          <group
+            position={[0.02, 7.23, 8.8]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.21, 1.27, 0.21]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_44.geometry}
+              material={nodes.Object_44.material}
+            />
           </group>
           <group position={[-0.49, 1.06, -5.95]} scale={[0.08, 3, 0.08]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_46.geometry} material={nodes.Object_46.material} />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_46.geometry}
+              material={nodes.Object_46.material}
+            />
           </group>
           <group position={[0.5, 1.06, -5.96]} scale={[0.08, 3, 0.08]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_48.geometry} material={nodes.Object_48.material} />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_48.geometry}
+              material={nodes.Object_48.material}
+            />
           </group>
-          <group position={[0, 0.88, -5.95]} rotation={[0, 0, -Math.PI / 2]} scale={[0.08, 0.56, 0.08]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_50.geometry} material={nodes.Object_50.material} />
+          <group
+            position={[0, 0.88, -5.95]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.08, 0.56, 0.08]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_50.geometry}
+              material={nodes.Object_50.material}
+            />
           </group>
-          <group position={[0.49, -0.26, -5.32]} rotation={[Math.PI / 2, 0, 0]} scale={[0.08, 0.67, 0.08]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_52.geometry} material={nodes.Object_52.material} />
+          <group
+            position={[0.49, -0.26, -5.32]}
+            rotation={[Math.PI / 2, 0, 0]}
+            scale={[0.08, 0.67, 0.08]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_52.geometry}
+              material={nodes.Object_52.material}
+            />
           </group>
-          <group position={[-0.49, -0.26, -5.32]} rotation={[Math.PI / 2, 0, 0]} scale={[0.08, 0.67, 0.08]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_54.geometry} material={nodes.Object_54.material} />
+          <group
+            position={[-0.49, -0.26, -5.32]}
+            rotation={[Math.PI / 2, 0, 0]}
+            scale={[0.08, 0.67, 0.08]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_54.geometry}
+              material={nodes.Object_54.material}
+            />
           </group>
-          <group position={[0, 1.99, -5.95]} rotation={[0, 0, -Math.PI / 2]} scale={[0.08, 0.56, 0.08]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_56.geometry} material={nodes.Object_56.material} />
+          <group
+            position={[0, 1.99, -5.95]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.08, 0.56, 0.08]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_56.geometry}
+              material={nodes.Object_56.material}
+            />
           </group>
-          <group position={[0, 3.08, -5.95]} rotation={[0, 0, -Math.PI / 2]} scale={[0.08, 0.56, 0.08]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_58.geometry} material={nodes.Object_58.material} />
+          <group
+            position={[0, 3.08, -5.95]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.08, 0.56, 0.08]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_58.geometry}
+              material={nodes.Object_58.material}
+            />
           </group>
-          <group position={[0, -0.25, -5.95]} rotation={[0, 0, -Math.PI / 2]} scale={[0.08, 0.56, 0.08]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_60.geometry} material={nodes.Object_60.material} />
+          <group
+            position={[0, -0.25, -5.95]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.08, 0.56, 0.08]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_60.geometry}
+              material={nodes.Object_60.material}
+            />
           </group>
-          <group position={[0, -1.25, -5.95]} rotation={[0, 0, -Math.PI / 2]} scale={[0.08, 0.56, 0.08]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_62.geometry} material={nodes.Object_62.material} />
+          <group
+            position={[0, -1.25, -5.95]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.08, 0.56, 0.08]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_62.geometry}
+              material={nodes.Object_62.material}
+            />
           </group>
-          <group position={[-0.49, 2, -5.32]} rotation={[Math.PI / 2, 0, 0]} scale={[0.08, 0.67, 0.08]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_64.geometry} material={nodes.Object_64.material} />
+          <group
+            position={[-0.49, 2, -5.32]}
+            rotation={[Math.PI / 2, 0, 0]}
+            scale={[0.08, 0.67, 0.08]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_64.geometry}
+              material={nodes.Object_64.material}
+            />
           </group>
-          <group position={[0.49, 2, -5.32]} rotation={[Math.PI / 2, 0, 0]} scale={[0.08, 0.67, 0.08]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_66.geometry} material={nodes.Object_66.material} />
+          <group
+            position={[0.49, 2, -5.32]}
+            rotation={[Math.PI / 2, 0, 0]}
+            scale={[0.08, 0.67, 0.08]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_66.geometry}
+              material={nodes.Object_66.material}
+            />
           </group>
           <group position={[0, 0.84, 4.87]} scale={[0.57, 2.65, 0.57]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_68.geometry} material={nodes.Object_68.material} />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_68.geometry}
+              material={nodes.Object_68.material}
+            />
           </group>
           <group position={[4.66, 0, 0]} rotation={[1.92, 0.72, -0.96]}>
-            <mesh castShadow receiveShadow geometry={nodes.Object_70.geometry} material={materials.pilar} />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_70.geometry}
+              material={materials.pilar}
+            />
           </group>
         </group>
       </group>
     </group>
-  )
+  );
 }
 
-useGLTF.preload('/billboard.glb')
+useGLTF.preload("/billboard.glb");

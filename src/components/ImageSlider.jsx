@@ -34,7 +34,7 @@ const ImageSlider = () => {
   return (
     <div
       onClick={() => (state.showPopup = { name: "", show: false })}
-      className="w-screen flex justify-center h-screen fixed top-0 p-10 left-0 bg-black/90 backdrop-blur-sm"
+      className="w-screen flex justify-center z-[999999999999999999] h-screen fixed top-0 p-10 left-0 bg-black/90 backdrop-blur-sm"
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -47,7 +47,7 @@ const ImageSlider = () => {
           <p className="font-normal">Fin-tech - Mobile/Web</p>
         </div>
 
-        <div className="w-full overflow-hidden object-cover max-w-2xl bg-slate-400 flex-1 rounded-lg ">
+        <div className="w-full overflow-hidden object-cover max-w-2xl bg-slate-400 rounded-lg ">
           {Projects.map((item, index) => (
             <>
               <div

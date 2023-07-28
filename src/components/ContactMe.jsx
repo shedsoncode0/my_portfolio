@@ -5,7 +5,7 @@ const ContactMe = () => {
   return (
     <section
       onClick={() => (state.showPopup = { name: "", show: false })}
-      className="bg-black/90 backdrop-blur-sm  w-full h-full fixed top-0 left-0 grid place-content-center"
+      className="bg-black/90 z-[999999999999999999] backdrop-blur-sm  w-full h-full fixed top-0 left-0 grid place-content-center"
     >
       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">
