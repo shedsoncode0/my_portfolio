@@ -14,10 +14,10 @@ const Effects = () => {
   return (
     <>
       {/* <Cloud segments={20} position={[-4, -2, -25]} speed={0.2} opacity={1} /> */}
-      <Cloud segments={10} position={[4, 8, -15]} speed={0.2} opacity={0.5} />
+      {/* <Cloud segments={10} position={[4, 8, -15]} speed={0.2} opacity={0.5} />
       <Cloud segments={10} position={[-4, 8, -10]} speed={0.2} opacity={1} />
       <Cloud segments={10} position={[4, 9, 5]} speed={0.2} opacity={0.5} />
-      <Cloud segments={10} position={[4, 7, 0]} speed={0.2} opacity={0.75} />
+      <Cloud segments={10} position={[4, 7, 0]} speed={0.2} opacity={0.75} /> */}
       {/* <PositionalAudio
         url="/audios/sneaker-shoe-on-concrete-floor-fast-pace-1-www.FesliyanStudios.com.mp3"
         distance={1}
