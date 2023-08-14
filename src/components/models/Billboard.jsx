@@ -35,7 +35,7 @@ export default function Billboard(props) {
           >
             {/* screen */}
             <Plane args={[3, 3, 3]}>
-              <meshStandardMaterial map={texture} toneMapped={false} />
+              <meshStandardMaterial  />
             </Plane>
           </group>
 

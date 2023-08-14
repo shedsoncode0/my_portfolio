@@ -51,7 +51,8 @@ const CanvasScene = () => {
           </Physics>
         </Suspense>
       </Canvas>
-      <LoadingScreen started={start} onStarted={() => setStart(true)} />
+      {/* <LoadingScreen started={start} onStarted={() => setStart(true)} /> */}
+      <Loader />
     </KeyboardControls>
   );
 };

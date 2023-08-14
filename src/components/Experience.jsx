@@ -236,7 +236,7 @@ const Experience = () => {
         makeDefault
         ref={cameraRef}
       />
-     
+
       <OrbitControls
         // enableZoom={false}
         // enableRotate={false}
@@ -283,7 +283,7 @@ const Experience = () => {
         }}
         ref={characterRef}
         colliders={false}
-        position={[0, 14, 7]}
+        position={[0, 20, 7]}
         type="dynamic"
         canSleep={false}
         restitution={0.1}
@@ -360,8 +360,9 @@ const Experience = () => {
 
       <Zeppelin />
 
-      {locationPin.map((location) => (
+      {locationPin.map((location, index) => (
         <Float
+          key={index}
           scale={0.5}
           rotationIntensity={1}
           speed={3}

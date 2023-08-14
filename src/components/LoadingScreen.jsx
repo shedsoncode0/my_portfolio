@@ -32,9 +32,9 @@ const LoadingScreen = ({ onStarted, started }) => {
       ease: Power3.easeInOut,
       duration: 2,
       onComplete: () => {
-        onStarted();
       },
     });
+    onStarted();
   };
 
   //   const defaultOptions = {
@@ -57,22 +57,25 @@ const LoadingScreen = ({ onStarted, started }) => {
         {/* <Lottie options={defaultOptions} height={200} width={200} /> */}
         <div className="text-center flex justify-center items-center font-medium">
           {" "}
-          {progress !== 100 ? (
-            <h1 className=" text-white">{`%${Math.floor(progress)}`}</h1>
-          ) : (
-            <m.button
-              ref={buttonRef}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-              className="btn relative px-4 h-11 overflow-hidden cursor-pointer bg-white rounded-full"
-              onClick={() => {
-                explore();
-              }}
-            >
-              {!leave && "Explore"}
-            </m.button>
-          )}
+          {
+            progress !== 100 ? (
+              <h1 className=" text-white">{`%${Math.floor(progress)}`}</h1>
+            ) : ( () => 
+              explore()
+            )
+            // <m.button
+            //   ref={buttonRef}
+            //   initial={{ opacity: 0 }}
+            //   animate={{ opacity: 1 }}
+            //   transition={{ duration: 1 }}
+            //   className="btn relative px-4 h-11 overflow-hidden cursor-pointer bg-white rounded-full"
+            //   onClick={() => {
+
+            //   }}
+            // >
+            //   {!leave && "Explore"}
+            // </m.button>
+          }
         </div>
       </div>
     </m.div>
