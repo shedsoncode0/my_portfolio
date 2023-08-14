@@ -25,11 +25,11 @@ const Effects = () => {
         loop
         // All THREE.PositionalAudio props are valid
       /> */}
-      <Lights />
+      {/* <Lights /> */}
       <Stars radius={500} depth={50} count={1000} factor={10} />
       <SoftShadows size={130} samples={20} focus={0} />
       <axesHelper />
-      {/* <Environment map={envMap} blur={0} /> */}
+      <Environment map={envMap} blur={0} />
     </>
   );
 };

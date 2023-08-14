@@ -14,7 +14,7 @@ import { useControls } from "leva";
 function App() {
   const { setSpeed } = useContext(AppContext);
   const { walkSpeed, runSpeed } = useControls({
-    walkSpeed: { value: 0.00034, min: 0.0001, max: 0.0009 },
+    walkSpeed: { value: 0.00024, min: 0.0001, max: 0.0009 },
     runSpeed: { value: 0.0006, min: 0.00035, max: 0.005 },
   });
   const snap = useSnapshot(state);
